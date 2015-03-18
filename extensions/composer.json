@@ -26,5 +26,8 @@
     "scripts": {
         "post-package-install": "Bolt\\Composer\\ExtensionInstaller::handle",
         "post-package-update": "Bolt\\Composer\\ExtensionInstaller::handle"
+    },
+    "require": {
+        "bolt/colourpicker": "~1.0"
     }
 }

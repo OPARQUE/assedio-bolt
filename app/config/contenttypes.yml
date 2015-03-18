@@ -11,196 +11,277 @@
 # list the different types of services a company provides, you can group these
 # together.
 
-pages:
-    name: Pages
-    singular_name: Page
+paginas:
+    name: Páginas
+    singular_name: Página
     fields:
-        title:
+        titulo:
+            label: Título
             type: text
             class: large
-            group: content
         slug:
             type: slug
-            uses: title
-        image:
+            uses: titulo
+        imagem-destaque:
+            label: Imabem de Destaque
             type: image
-        teaser:
-            type: html
-            height: 150px
-        body:
-            type: html
-            height: 300px
-        template:
-            type: templateselect
-            filter: '*.twig'
-    taxonomy: [ chapters ]
-    recordsperpage: 100
-
-
-# Entries can be used for things like 'news' or 'blogpostings'. They have a 'teaser',
-# which can be used for a short blurb on listing-pages, allowing visitors to
-# click-through to the rest of the entry. It also has fields for an image and an
-# optional video.
-# A relation is defined to the pages contenttype. This way you can refer to a page
-# from your news-item.
-# This contenttype defines 'categories' and 'tags' as taxonomies, allowing the
-# editor to use both to categorize a specific entry.
-# The 'sort' is set to '-datepublish', which means that newer entries will be
-# shown above older entries.
-
-entries:
-    name: Entries
-    singular_name: Entry
-    fields:
-        title:
-            type: text
-            class: large
-            group: content
-        slug:
-            type: slug
-            uses: title
-        teaser:
-            type: html
-            height: 150px
-        body:
-            type: html
-            height: 300px
-        image:
-            type: image
-            group: media
-        video:
-            type: video
-    relations:
-        pages:
-          multiple: false
-          order: title
-          label: Select a page
-    taxonomy: [ categories, tags ]
-    record_template: entry.twig
-    listing_template: listing.twig
-    listing_records: 10
-    default_status: publish
-    sort: -datepublish
-    recordsperpage: 10
-
-# The 'Showcases' is not particularly useful in most cases, but it does a good
-# job of showcasing most of the available fieldtypes. Feel free to delete it, or
-# copy some fields to your own contenttypes.
-# Since no templates are defined for this contenttype, the default record_template,
-# listing_template, and related settings are used from config.yml
-
-showcases:
-    name: Showcases
-    slug: showcases
-    singular_name: Showcase
-    singular_slug: showcase
-    fields:
-        title:
-            type: text
-            class: large
-            required: true
-            pattern: ".{2,255}" # see: http://html5pattern.com/
-            error: "The Title field is required, and must contain at least 2 characters"
-            group: Text
-        slug:
-            type: slug
-            uses: [ title ]
-        html:
-            type: html
-            height: 150px
-        textarea:
+            postfix: "<p><em>Nem todas as páginas contém uma imagem de destaque exibida, mas é importante adicioná-la, para gerar metatags que serão lidas pelo Facebook.</em></p>"
+        resumo:
             type: textarea
-            postfix: "<p><em>This is a plain text area. the contents will not be processed.</em></p>"
-        markdown:
-            type: markdown
-            postfix: "<p><em>This field gets parsed as <a href='https://help.github.com/articles/markdown-basics'>Markdown</a>, when rendered on the site.</em></p>"
-        geolocation:
-            type: geolocation
-            group: Media
+        corpo:
+            type: html
+            height: 300px
+
+noticias:
+    name: Notícias
+    singular_name: Notícia
+    fields:
+        titulo:
+            label: Título
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        titulo-destaque:
+            label: Título de Destaque
+            type: text
+            class: large
+            postfix: "<p><em>O título destaque aparece apenas em algumas páginas, como nos blocos da home.</em></p>"
+        imagem-destaque:
+            label: Imagem de Destaque
+            type: image
+        resumo:
+            type: textarea
+        corpo:
+            type: html
+            height: 300px
+    taxonomy: [ categorias-noticias, tags ]
+    relations:
+        galerias:
+            multiple: false
+            label: Selecione uma galeria
+            postfix: "<p><em>Só escolha uma galeria caso a notícia precise exibir alguma.</em></p>"
+
+projetos:
+    name: Projetos
+    singular_name: Projeto
+    fields:
+        titulo:
+            label: Título
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        titulo-destaque:
+            label: Título de Destaque
+            type: text
+            class: large
+            postfix: "<p><em>O título destaque aparece apenas em algumas páginas, como nos blocos da home.</em></p>"
+        imagem-destaque:
+            label: Imagem de Destaque
+            type: image
+        logo:
+            type: image
+            postfix: "<p><em>Este é o logo que aparece no filete do projeto, na galeria de projetos.</p>"
+        cor-titulo:
+            type: colourpicker
+            label: Cor do Título
+            postfix: "<p><em>Escolha uma cor que gere contraste com a imagem de destaque.</p>"
+            values:
+                "#000000": Preto
+                "#E1E1E1": Branco
+                "#444444": Cinza Escuro
+                "#FF0011": Vermelho Claro
+        resumo:
+            type: textarea
+        corpo:
+            type: html
+            height: 300px
+    taxonomy: [ tags ]
+    relations:
+        galerias:
+            multiple: false
+            label: Selecione uma galeria
+            postfix: "<p><em>Só escolha uma galeria caso o projeto precise exibir alguma.</em></p>"
+
+itens-biblioteca:
+    name: Itens da Biblioteca
+    singular_name: Item da Biblioteca
+    fields:
+        titulo:
+            label: Título
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        resumo:
+            type: textarea
+        icone:
+            label: Ícone
+            type: text
+            postfix: "<p><em>Escolha o código de um ícone do <a href='http://fontawesome.io/icons/' target='_blank'>Font Awesome</a>. Ex:</em> <code>fa fa-diamond</code></p>"
+
+# Tipos de itens da biblioteca
+# Cada tipo de conteúdo abaixo é um item da biblioteca
+projetos-aprovados:
+    name: Bib - Projetos Aprovados
+    singular_name: Projeto Aprovado
+    fields:
+        titulo:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        resumo:
+            type: textarea
+        corpo:
+            type: html
+            height: 300px
+        arquivo:
+            type: file
+
+outros-conteudos:
+    name: Bib - Outros Conteúdos
+    singular_name: Outro Conteúdo
+    fields:
+        titulo:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        resumo:
+            type: textarea
+        corpo:
+            type: html
+            height: 300px
+        arquivo:
+            type: file
+
+linkerias:
+    name: Bib - Linkerias
+    singular_name: Linkeria
+    fields:
+        titulo:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        corpo:
+            type: html
+            height: 300px
+            postfix: "<p><em>Todos os links são inseridos no corpo.</em></p>"
+
+fotos:
+    name: Bib - Fotos
+    singular_name: Fotos
+    fields:
+        titulo:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        resumo:
+            type: textarea
+        corpo:
+            type: html
+            height: 300px
+    relations:
+        galerias:
+            multiple: false
+            label: Escolha uma galeria
+
+videos:
+    name: Bib - Vídeos
+    singular_name: Vídeo
+    fields:
+        titulo:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        resumo:
+            type: textarea
+        corpo:
+            type: html
+            height: 300px
         video:
             type: video
-        image:
-            type: image
-            attrib: title
-            extensions: [ gif, jpg, png ]
-        imagelist:
+# --/
+
+galerias:
+    name: Galerias
+    singular_name: Galeria
+    fields:
+        titulo:
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        Imagens:
             type: imagelist
-        file:
-            type: file
-            group: files
-        filelist:
-            type: filelist
-        template:
-            type: templateselect
-            filter: '*.twig'
-        checkbox:
-            type: checkbox
-            label: "This is a checkbox"
-            group: other
-        datetime:
-            type: datetime
-            default: "2000-01-01"
-            variant: inline
-        date:
-            type: date
-            default: "first day of last month"
-            variant: inline
-        integerfield:
-            type: integer
-            index: true
-        floatfield:
-            type: float
-        selectfield:
+            postfix: "<p><em>É recomendável que todas as imagens tenham o mesmo tamanho, para ficarem alinhadas na exibiçao da página.</em></p>"
+        Colunas:
             type: select
-            values: [ none, foo, bar ]
-        multiselect:
-            type: select
-            values: [ A-tuin, Donatello, Rafael, Leonardo, Michelangelo, Koopa, Squirtle ]
-            multiple: true
-            postfix: "Select your favourite turtle(s)."
-        selectentry:
-            type: select
-            values: entries/id,title
-            postfix: "Select an entry"
-            autocomplete: true
-            sort: title
-    relations:
-        entries:
-            multiple: false
-            label: "Choose an entry"
-            order: -id
-            format: "{{ item.title|escape }} <span>(№ {{ item.id }})</span>"
-            postfix: "By selecting an Entry, you're creating a bi-directional relationship to that Entry."
-        pages:
-            multiple: true
-            order: title
-            label: Select zero or more pages
-    taxonomy: [ categories, tags ]
-    show_on_dashboard: true
-    default_status: publish
-    searchable: false
-    icon_many: "fa:cubes"
-    icon_one: "fa:cube"
+            values: [ 2, 3, 4, 6 ]
+            postfix: "<p><em>Número de colunas que a galeria terá.</em></p>"
 
-
-# possible field types:
-# text - varchar(256) - input type text.
-# integer - integer - Input field for integer numbers.
-# float - double - Input field for floating numbers, stored as 'Double'.
-# geolocation - text (65kb) - Input field for geolocation. Enter an address, and the location is geocoded to latitude/longitude coordinates
-# imagelist - text (65kb) - Input type for imagelists. Add multiple images with a description. Useful for image sliders, galleries, etcetera.
-# image - varchar(256) - image select/upload widget, stored as filename.
-# file - varchar(256) - file select/upload widget, stored as filename.
-# filelist - text (65kb) - Input type for a list of files. Including a description.
-# video - varchar(256) - Video embed widget, stored as filename.
-# html - text (65kb) - wysiwyg element.
-# textarea - varchar(32768) - Simple, plain < textarea > field.
-# markdown - varchar(32768) - Simple, plain < textarea > field, which is parsed as Markdown text.
-# datetime - datetime - date and time selector widget.
-# date - datetime - date selector widget.
-# select - varchar(256) - select with predefined values
-# templateselect - varchar(256) - select with template filenames
-# checkbox - integer - checkbox-field which is 1 (checked) or 0 (unchecked)
-
-
-# number (deprecated) - input type decimal(18,9), useful for storing number that need to be sortable
+config-assedio:
+    name: Config Assédio
+    singular_name: Configuração
+    fields:
+        titulo:
+            type: text
+            class: large
+            group: Geral
+        slug:
+            type: slug
+            uses: titulo
+            group: Geral
+        descricao:
+            type: textarea
+            group: Geral
+        facebook:
+            type: text
+            group: Redes Sociais
+        Yutube:
+            type: text
+            group: Redes Sociais
+        Instagram:
+            type: text
+            group: Redes Sociais
+        Twitter:
+            type: text
+            group: Redes Sociais
+        logo-site:
+            type: image
+            group: Logos
+            postfix: "<p><em>Este é o logo principal do site, e não é recomendado alterar.</em></p>"
+        logo-menu:
+            type: image
+            group: Logos
+            postfix: "<p><em>Esta é a régua de logos que aparece abaixo do menu principal.</em></p>"
+        logo-rodape:
+            type: image
+            group: Logos
+            postfix: "<p><em>Esta é a régua de logo que aparece no rodapé da Home.</em></p>"
+        desc-rodape:
+            type: textarea
+            group: Rodapé
+            postfix: "<p><em>Este é o texto que aparece na lateral esquerda do roapé da home, ladeado com o pequeno logo da Assédio.</em></p>"
+        logo-assedio-rodape:
+            type: image
+            group: Rodapé
+            postfix: "<p><em>Este é o pequeno logo (coração) da Assédio que fica no rodapé.</em></p>"
+        hashtags:
+            type: html
+            group: Rodapé
+            postfix: "<p><em>Estas são as hashtags que aparecem no rodapé da home.</em></p>"

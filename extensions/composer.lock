@@ -1,0 +1,71 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "539dfc8edf0ee7c1a20808f7a6e48427",
+    "packages": [
+        {
+            "name": "bolt/colourpicker",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rossriley/bolt-extension-colourpicker.git",
+                "reference": "f7762733bc9c872f75e435a910f7fc88cf7e4d45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rossriley/bolt-extension-colourpicker/zipball/f7762733bc9c872f75e435a910f7fc88cf7e4d45",
+                "reference": "f7762733bc9c872f75e435a910f7fc88cf7e4d45",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": ">1.9,<3.0.0"
+            },
+            "type": "bolt-extension",
+            "extra": {
+                "bolt-assets": "assets",
+                "bolt-screenshots": [
+                    "screenshot.png"
+                ]
+            },
+            "autoload": {
+                "files": [
+                    "init.php"
+                ],
+                "psr-4": {
+                    "Bolt\\Extensions\\Colourpicker\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ross Riley",
+                    "email": "riley.ross@gmail.com"
+                }
+            ],
+            "description": "An extension to add a colourpicker as a field type within Bolt",
+            "keywords": [
+                "backend",
+                "colourpicker",
+                "field"
+            ],
+            "support": {
+                "source": "https://github.com/rossriley/bolt-extension-colourpicker/tree/1.0",
+                "issues": "https://github.com/rossriley/bolt-extension-colourpicker/issues"
+            },
+            "time": "2014-10-24 06:06:20"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
