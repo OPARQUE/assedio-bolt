@@ -219,10 +219,10 @@ galerias:
         slug:
             type: slug
             uses: titulo
-        Imagens:
+        imagens:
             type: imagelist
             postfix: "<p><em>É recomendável que todas as imagens tenham o mesmo tamanho, para ficarem alinhadas na exibiçao da página.</em></p>"
-        Colunas:
+        colunas:
             type: select
             values: [ 2, 3, 4, 6 ]
             postfix: "<p><em>Número de colunas que a galeria terá.</em></p>"
@@ -279,6 +279,16 @@ config-assedio:
             type: html
             group: Rodapé
             postfix: "<p><em>Estas são as hashtags que aparecem no rodapé da home.</em></p>"
+        mapa:
+            label: Localização
+            type: geolocation
+            postfix: "<p><em>Localização da Assédio</em></p>"
+            group: Página de Contato
+        email:
+            label: E-mail de contato
+            type: text
+            postfix: "<p><em>Endereço que receberá os e-mails enviados pelo formulário de conato.</em></p>"
+            group: Página de Contato
     show_on_dashboard: false
     searchable: false
     viewless: true

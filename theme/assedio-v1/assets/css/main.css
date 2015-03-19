@@ -1,0 +1,553 @@
+@import url(http://fonts.googleapis.com/css?family=Dosis:200,400,600);
+@import url(http://fonts.googleapis.com/css?family=Scada:400italic,700italic,400,700);
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/01/2015, 10:58:49
+    Author     : romuloguimaraes
+*/
+/* Rosa */
+/* Laranja */
+/* Preto */
+/* Branco */
+.cor1 {
+  color: #ec7e8b;
+}
+.cor2 {
+  color: #f04e3e;
+}
+.cor3 {
+  color: #000000;
+}
+.cor4 {
+  color: #ffffff;
+}
+.bg1 {
+  background-color: #ec7e8b;
+}
+.bg2 {
+  background-color: #f04e3e;
+}
+.bg3 {
+  background-color: #000000;
+}
+.bg4 {
+  background-color: #ffffff;
+}
+.height1 {
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.min-height1 {
+  min-height: 240px;
+}
+.link-preto a {
+  color: #000000;
+}
+.link-preto a:hover {
+  color: #4d4d4d;
+}
+.link-preto-2 a {
+  color: #000000;
+}
+.link-preto-2 a:hover {
+  color: #ec7e8b;
+}
+.link-branco a {
+  color: #ffffff;
+}
+.link-branco a:hover {
+  color: #ec7e8b;
+}
+.link-laranja a {
+  color: #f04e3e;
+}
+.link-laranja a:hover {
+  color: #ffffff;
+}
+.link-rosa a {
+  color: #ec7e8b;
+}
+.link-rosa a:hover {
+  color: #ffffff;
+}
+.link-neutro a:hover {
+  color: #000000;
+}
+.link-neutro a.cor1:hover {
+  color: #ec7e8b;
+}
+.link-neutro a.cor2:hover {
+  color: #f04e3e;
+}
+.link-neutro a.cor3:hover {
+  color: #000000;
+}
+.link-neutro a.cor4:hover {
+  color: #ffffff;
+}
+.texto-bg-preto {
+  padding: 4px 6px;
+  background-color: #000000;
+  font-weight: 400;
+}
+.padding-bottom-1 {
+  padding-bottom: 20px;
+}
+.padding-bottom-2 {
+  padding-bottom: 40px;
+}
+.padding-top-1 {
+  padding-top: 20px;
+}
+.padding-top-2 {
+  padding-top: 40px;
+}
+.margin-bottom-1 {
+  margin-bottom: 20px;
+}
+.margin-bottom-2 {
+  margin-bottom: 40px;
+}
+.margin-top-1 {
+  margin-top: 20px;
+}
+.margin-top-2 {
+  margin-top: 40px;
+}
+.margin-right-1 {
+  margin-right: 20px;
+}
+/* Mixins */
+/* RESETS */
+body {
+  font-family: 'Dosis', sans-serif;
+  font-size: 16px;
+  background-color: #000000;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Dosis', sans-serif;
+}
+p {
+  font-family: 'Scada', sans-serif;
+  font-size: 16px;
+}
+a:hover,
+a:visited,
+a:focus {
+  text-decoration: none;
+}
+/* SIDEBAR - ESQUERDA */
+.container-sidebar {
+  z-index: 99;
+  box-shadow: 0 0px 10px #000000;
+  -webkit-box-shadow: 0 0px 10px #000000;
+  -moz-box-shadow: 0 0px 10px #000000;
+}
+.sidebar-esquerda {
+  background-color: #000000;
+  color: #ffffff;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+ul li a {
+  display: block;
+}
+ul li a:hover {
+  text-decoration: none;
+}
+ul li ul li {
+  margin-left: 10px;
+}
+#menu-principal {
+  padding: 0;
+  font-size: 20px;
+}
+form input {
+  background: #000000;
+  border: 1px solid #4d4d4d;
+  padding: 5px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* HOME - CENTRO */
+.central-home {
+  background-color: #ffffff;
+}
+.slider-home {
+  min-height: 240px;
+  background-color: #ec7e8b;
+  padding: 0;
+}
+.slider-item {
+  background-size: cover;
+  background-position: 50% 50%;
+  width: 100%;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.slider-titulo {
+  background: #000000;
+  color: #ffffff;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  font-size: 22px;
+  position: absolute;
+  margin-left: 15px;
+  bottom: 20px;
+}
+.card-noticia {
+  padding-right: 15px;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.card-noticia p {
+  line-height: 1.2;
+}
+.card-imagem {
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.card-data {
+  position: relative;
+  background-color: #000000;
+  padding: 4px;
+  color: #ffffff;
+  width: 36px;
+  margin-top: 10px;
+}
+.card-data span:first-child {
+  font-size: 28px;
+}
+.card-titulo {
+  background-color: #ffffff;
+  margin: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.card-titulo a {
+  color: #000000;
+}
+.card-titulo a:hover {
+  color: #ec7e8b;
+}
+.card-titulo-especial {
+  background-color: #000000;
+  margin: 20px;
+  position: absolute;
+  bottom: 0;
+}
+.card-titulo-especial a {
+  color: #ffffff;
+}
+.card-titulo-especial a:hover {
+  color: #ec7e8b;
+}
+.overlay-card {
+  position: absolute;
+  width: 100%;
+  /*min-height: @height1;*/
+  height: 240px;
+  background-color: #000000;
+  margin-left: -15px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  opacity: 0.7;
+  -o-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+}
+.overlay-card:hover {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+.overlay-projetos {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+}
+/* HOME - DIREITA*/
+.bloco-biblioteca {
+  overflow: hidden;
+  background-color: #f04e3e;
+  color: #000000;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.bloco-agenda {
+  background-color: #000000;
+  color: #ffffff;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.data-agenda {
+  margin-right: 10px;
+}
+.bloco-parceiros {
+  background-color: #ffffff;
+  color: #000000;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.bloco-logos {
+  background-color: #ec7e8b;
+  color: #000000;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+/* RODAPÉ HOME */
+.rodape-home {
+  min-height: 240px;
+  background-color: #ec7e8b;
+  color: #000000;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  z-index: 9;
+}
+.hashtags-rodape {
+  overflow: hidden;
+  font-size: 20px;
+}
+/* NOSSOS PROJETOS */
+.menu-secundario-projetos {
+  padding: 0;
+}
+.menu-secundario-projetos li {
+  margin-bottom: 10px;
+}
+.card-projeto {
+  position: relative;
+  display: block;
+  background-size: cover;
+  background-position: 50% bottom;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+.card-projeto:hover {
+  box-shadow: 0 0 20px #000000;
+  -webkit-box-shadow: 0 0 20px #000000;
+  -moz-box-shadow: 0 0 20px #000000;
+  z-index: 2;
+}
+.card-projeto .logo-card-projeto,
+.card-projeto h2 {
+  position: relative;
+  z-index: 2;
+}
+.card-projeto.overlay-projetos {
+  z-index: 1;
+}
+.sobre-projetos {
+  z-index: 2;
+  box-shadow: 0 0 20px #000000;
+  -webkit-box-shadow: 0 0 20px #000000;
+  -moz-box-shadow: 0 0 20px #000000;
+}
+.corpo-projeto {
+  background-color: #ffffff;
+}
+.slider-projetos,
+.slider-biblioteca {
+  margin-bottom: 0 !important;
+}
+.logo-card-projeto {
+  height: 200px;
+}
+.slick-next {
+  right: 0;
+  width: 40px;
+  height: 40px;
+}
+.slick-prev {
+  width: 40px;
+  height: 40px;
+  z-index: 9999;
+}
+/* BIBLIOTECA */
+.card-biblioteca {
+  display: block;
+  background-color: #ec7e8b;
+  color: #000000;
+  overflow: hidden;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-left: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+.card-biblioteca:hover {
+  box-shadow: 0 0 20px #000000;
+  -webkit-box-shadow: 0 0 20px #000000;
+  -moz-box-shadow: 0 0 20px #000000;
+  background-color: #f04e3e;
+  z-index: 2;
+}
+.logo-card-biblioteca {
+  min-height: 160px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #000000;
+}
+.biblioteca-ativo {
+  background-color: #f04e3e;
+}
+.card-corpo-lista-biblioteca {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #cccccc;
+}
+/* NÓS */
+.topo-nos {
+  /*min-height: @height1;*/
+  height: 240px;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+.corpo-nos-equipe {
+  min-height: 240px;
+  background-color: #f04e3e;
+  color: #ffffff;
+}
+.card-face-equipe {
+  height: 320px;
+  overflow: hidden;
+}
+/* CONTATO */
+#mapa-galpao {
+  min-height: 400px;
+}
+.about-contato-direita {
+  background-color: #ec7e8b;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+/* COLABORE */
+.card-noticia-colabore {
+  border-right: 1px solid #000000;
+  margin-bottom: 20px;
+}
+/* NOTÍCIAS */
+.lista-noticias {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.item-lista-noticias {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #000000;
+}
+.item-lista-noticias h2 {
+  margin-top: 0;
+}
+.item-lista-noticias a {
+  color: #000000;
+}
+.item-lista-noticias a:hover {
+  color: #ec7e8b;
+}
+.noticia-meta {
+  color: #808080;
+  margin-bottom: 10px;
+}
+.noticia-meta a {
+  margin-left: 10px;
+  color: #ec7e8b;
+}
+.noticia-meta a:hover {
+  color: #000000;
+}
+a.leia-mais {
+  color: #808080;
+  font-weight: 600;
+}
+.paginacao-noticias {
+  margin-top: 20px;
+}
+.paginacao-noticias a {
+  color: #000000;
+}
+.paginacao-noticias a:hover {
+  color: #ec7e8b;
+}
+.paginacao-noticias a {
+  font-size: 22px;
+}
+.card-agenda {
+  background-color: #000000;
+  color: #f04e3e;
+}
+.card-agenda a {
+  color: #f04e3e;
+}
+.card-agenda a:hover {
+  color: #ffffff;
+}
+.card-agenda p span.titulo-item-agenda {
+  color: #ffffff;
+}
+a.item-agenda {
+  display: block;
+}
+.card-instagram {
+  background-size: cover;
+  background-position: 50% 50%;
+  /*min-height: @height1;*/
+  height: 240px;
+}
+.card-colabore {
+  overflow: hidden;
+  color: #ffffff;
+}
+.sidebar-direita-noticias {
+  z-index: 2;
+  box-shadow: 0 0 20px #000000;
+  -webkit-box-shadow: 0 0 20px #000000;
+  -moz-box-shadow: 0 0 20px #000000;
+}
+.noticias-relacionadas {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.noticias-relacionadas a {
+  color: #000000;
+}
+.noticias-relacionadas a:hover {
+  color: #ec7e8b;
+}
+.noticias-relacionadas .card-noticia-colabore:last-child {
+  border-right: none;
+}
+/*# sourceMappingURL=main.css.map */
