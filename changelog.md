@@ -1,3 +1,25 @@
+Bolt 2.1.3
+----------
+
+Released 2015-03-18. Notable changes:
+
+ - Added: Added an option to delete a record, when editing it. (See #3134)
+ - Fixed: Upload UX Improvements (Thanks, @Pinpickle, see #3123)
+ - Removed: removed "frontend permission checks". (#see 3133)
+ - Fixed: Prevent extra spaces in excerpts. (See #3130)
+ - Fixed: Show notice on update of Bolt. (See #3129)
+ - Fixed: Make dashboard activity log autoupdate again (see #3126)
+ - Added: Make the sanitisation of markdown fields configurable. (see #2992 #3142)
+ - Fixed: Fixed z-index of sidebar. (See #3100)
+ - Fixed: Disable "revert" button on 'edit file' screen, when file is not wrtiable. (See #3009)
+ - Added: Allow for multiple (fallback) locales in `config.yml`. (Thanks @sintemaa, see #3127)
+ - Fixed: Warning for unsaved content comes up when nothing has been changed (see #3077)
+ - Fixed: Be a little more strict in picking 'selected' options: Only use the fallback, if there's no valid id set. 
+ - Change: Lock composer.json to Symfony 2.6.4 as 2.6.5 fails PHPUnit
+ - Added: Re-added standalone jQuery lib, as some extensions might need it. 
+
+
+
 Bolt 2.1.1
 ----------
 

@@ -1,16 +1,3 @@
-# This file defines the contenttypes on the website. See the documentation for
-# details: http://docs.bolt.cm/content#defining-contenttypes
-
-# Pages can be used for the more 'static' pages on your site. Things like
-# 'about us', 'contact' or a 'disclaimer'. This content-type has a 'templateselect'
-# field, which allows you to override the record_template setting for an
-# individual page.
-# The taxonomy for this contenttype is defined as 'chapters', which is a so-called
-# "grouping taxonomy". This way you can easily group sets of pages that logically
-# belong together. If your site has a 'services' section, in which you'd like to
-# list the different types of services a company provides, you can group these
-# together.
-
 paginas:
     name: Páginas
     singular_name: Página
@@ -31,6 +18,7 @@ paginas:
         corpo:
             type: html
             height: 300px
+    searchable: false
 
 noticias:
     name: Notícias
@@ -56,7 +44,11 @@ noticias:
         corpo:
             type: html
             height: 300px
-    taxonomy: [ categorias-noticias, tags ]
+        data:
+            label: Data do evento (para agenda)
+            type: date
+            postfix: "<p><em>Só preencha esta informação caso a categoria seja <strong>AGENDA</strong></em></p>"
+    taxonomy: [ categorias, tags ]
     relations:
         galerias:
             multiple: false
@@ -123,6 +115,7 @@ itens-biblioteca:
             label: Ícone
             type: text
             postfix: "<p><em>Escolha o código de um ícone do <a href='http://fontawesome.io/icons/' target='_blank'>Font Awesome</a>. Ex:</em> <code>fa fa-diamond</code></p>"
+    searchable: false
 
 # Tipos de itens da biblioteca
 # Cada tipo de conteúdo abaixo é um item da biblioteca
@@ -233,6 +226,7 @@ galerias:
             type: select
             values: [ 2, 3, 4, 6 ]
             postfix: "<p><em>Número de colunas que a galeria terá.</em></p>"
+    searchable: false
 
 config-assedio:
     name: Config Assédio
@@ -285,3 +279,6 @@ config-assedio:
             type: html
             group: Rodapé
             postfix: "<p><em>Estas são as hashtags que aparecem no rodapé da home.</em></p>"
+    show_on_dashboard: false
+    searchable: false
+    viewless: true
