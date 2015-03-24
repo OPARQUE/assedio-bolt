@@ -54,6 +54,7 @@ noticias:
             multiple: false
             label: Selecione uma galeria
             postfix: "<p><em>Só escolha uma galeria caso a notícia precise exibir alguma.</em></p>"
+    default_status: publish
 
 projetos:
     name: Projetos
@@ -74,6 +75,7 @@ projetos:
         imagem-destaque:
             label: Imagem de Destaque
             type: image
+            postfix: "<p><em>Esta é a imagem que aparece no fundo do filete (é recomendável uma imagem com pelo menos 900px de altura)</em></p>"
         logo:
             type: image
             postfix: "<p><em>Este é o logo que aparece no filete do projeto, na galeria de projetos.</p>"
@@ -82,10 +84,10 @@ projetos:
             label: Cor do Título
             postfix: "<p><em>Escolha uma cor que gere contraste com a imagem de destaque.</p>"
             values:
+                "#EC7E8B": Rosa
+                "#ffffff": Branco
+                "#f04e3e": Laranja
                 "#000000": Preto
-                "#E1E1E1": Branco
-                "#444444": Cinza Escuro
-                "#FF0011": Vermelho Claro
         resumo:
             type: textarea
         corpo:
@@ -114,7 +116,7 @@ itens-biblioteca:
         icone:
             label: Ícone
             type: text
-            postfix: "<p><em>Escolha o código de um ícone do <a href='http://fontawesome.io/icons/' target='_blank'>Font Awesome</a>. Ex:</em> <code>fa fa-diamond</code></p>"
+            postfix: "<p><em>Escolha o código de um ícone do <a href='http://fontawesome.io/icons/' target='_blank'>Font Awesome</a>. Ex:</em> <code>fa-diamond</code></p>"
     searchable: false
 
 # Tipos de itens da biblioteca
@@ -169,6 +171,7 @@ linkerias:
             type: html
             height: 300px
             postfix: "<p><em>Todos os links são inseridos no corpo.</em></p>"
+    default_status: publish
 
 fotos:
     name: Bib - Fotos
@@ -214,6 +217,7 @@ galerias:
     singular_name: Galeria
     fields:
         titulo:
+            label: Título
             type: text
             class: large
         slug:
@@ -227,12 +231,33 @@ galerias:
             values: [ 2, 3, 4, 6 ]
             postfix: "<p><em>Número de colunas que a galeria terá.</em></p>"
     searchable: false
+    default_status: publish
+
+membros:
+    name: Membros
+    singular_name: Membro
+    fields:
+        titulo:
+            label: Nome do membro da equipe
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        imagem:
+            type: image
+        hashtags:
+            type: text
+    show_on_dashboard: false
+    searchable: false
+    viewless: true
 
 config-assedio:
     name: Config Assédio
     singular_name: Configuração
     fields:
         titulo:
+            label: Título
             type: text
             class: large
             group: Geral
@@ -241,6 +266,7 @@ config-assedio:
             uses: titulo
             group: Geral
         descricao:
+            label: Descrição
             type: textarea
             group: Geral
         facebook:
@@ -256,22 +282,27 @@ config-assedio:
             type: text
             group: Redes Sociais
         logo-site:
+            label: Logo do Site
             type: image
             group: Logos
             postfix: "<p><em>Este é o logo principal do site, e não é recomendado alterar.</em></p>"
         logo-menu:
+            label: Régua de logos do Menu
             type: image
             group: Logos
             postfix: "<p><em>Esta é a régua de logos que aparece abaixo do menu principal.</em></p>"
         logo-rodape:
+            label: Régua de logos do Rodapé
             type: image
             group: Logos
             postfix: "<p><em>Esta é a régua de logo que aparece no rodapé da Home.</em></p>"
         desc-rodape:
+            label: Descrição da Assédio no rodapé
             type: textarea
             group: Rodapé
             postfix: "<p><em>Este é o texto que aparece na lateral esquerda do roapé da home, ladeado com o pequeno logo da Assédio.</em></p>"
         logo-assedio-rodape:
+            label: Logo da Assédio no rodapé
             type: image
             group: Rodapé
             postfix: "<p><em>Este é o pequeno logo (coração) da Assédio que fica no rodapé.</em></p>"
@@ -288,6 +319,14 @@ config-assedio:
             label: E-mail de contato
             type: text
             postfix: "<p><em>Endereço que receberá os e-mails enviados pelo formulário de conato.</em></p>"
+            group: Página de Contato
+        telefone:
+            label: Telefone de Contato
+            type: text
+            group: Página de Contato
+        corpo:
+            label: Corpo da Página de Contato (endereço em três linhas)
+            type: textarea
             group: Página de Contato
     show_on_dashboard: false
     searchable: false

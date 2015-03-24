@@ -59,7 +59,7 @@
   display: inline-block;
 
   cursor: pointer;
-  border: 1px solid transparent;
+  border: 1px solid #ccc;
 }
 
 .simplecolorpicker.icon:after,
@@ -75,7 +75,7 @@
 .simplecolorpicker span.color:hover,
 .simplecolorpicker span.color[data-selected],
 .simplecolorpicker span.color[data-selected]:hover {
-  border: 1px solid #222; /* @gray-dark */
+  border: 4px solid #222; /* @gray-dark */
 }
 .simplecolorpicker span.color[data-selected]:after {
   color: #fff;
