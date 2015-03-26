@@ -192,6 +192,7 @@ form input {
   padding: 0;
 }
 .slider-item {
+  display: block;
   background-size: cover;
   background-position: 50% 50%;
   width: 100%;

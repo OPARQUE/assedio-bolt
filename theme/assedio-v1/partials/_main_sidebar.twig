@@ -1,0 +1,49 @@
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-2 col-xs-12 container-sidebar">
+    <div class="row sidebar-esquerda padding-bottom-1">
+        <div class="col-xs-12 margin-bottom-1 margin-top-1">
+            <a href="{{ paths.root }}">
+                <img src="{{ image(config.logo_site) }}" class="logo-width1 img-responsive hidden-xs center-block"/>
+                <img src="{{ image(config.logo_site_horizontal) }}" class="logo-width2 img-responsive visible-xs center-block"/>
+            </a>
+        </div>
+        <div class="col-xs-12 margin-bottom-1 margin-top-1 link-branco">
+            <form class="">
+                <input class="pull-left input-busca-width center-block" type="text" placeholder="buscar..."/>
+            </form>
+            <a class="visible-xs pull-left" style="margin-left: 10px;" data-toggle="collapse" href="#menu-principal" aria-expanded="false" aria-controls="menu-principal">
+                <span class="fa fa-bars fa-2x"></span>
+            </a>
+        </div>
+        <div class="col-xs-12 link-branco padding-bottom-1">
+            <nav class="navbar-collapse collapse" id="menu-principal">
+                <ul class="">
+                    {% setcontent menu = 'paginas/first/6' %}
+                    {% for item in menu %}
+                        <li>
+                            <a href="{{item.link}}">{{item.titulo}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="col-sm-12 hidden-xs margin-top-2">
+            <img src="{{ image(config.logo_menu) }}" class="img-responsive center-block" />
+            <hr class="hr-width" style="width: 80%;">
+        </div>
+        <div class="col-xs-12 link-branco text-center">
+            <a href="{{config.facebook}}" class="margin-right-1">
+                <span class="fa fa-facebook "></span>
+            </a>
+            <a href="{{config.youtube}}" class="margin-right-1">
+                <span class="fa fa-youtube "></span>
+            </a>
+            <a href="{{config.instagram}}" class="margin-right-1">
+                <span class="fa fa-instagram "></span>
+            </a>
+            <a href="{{config.twitter}}" class="margin-right-1">
+                <span class="fa fa-twitter "></span>
+            </a>
+        </div>
+    </div>
+</div>

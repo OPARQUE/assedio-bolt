@@ -1,5 +1,9 @@
 $(document).ready(function () {
     
+    $('.magnific, div.imageholder a').magnificPopup({
+        type: 'image'
+    });
+    
     var logoWidth1 = $(".logo-width1");
     var logoWidth2 = $(".logo-width2");
     

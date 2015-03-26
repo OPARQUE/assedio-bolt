@@ -233,6 +233,33 @@ galerias:
     searchable: false
     default_status: publish
 
+slides:
+    name: Slides
+    singular_name: Slide
+    fields:
+        titulo:
+            label: Título do Slide
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: titulo
+        imagem:
+            type: image
+            postfix: "<p><em></em></p>"
+        redirecionamento:
+            label: Link de redirecionamento, ao clicar no slide
+            type: text
+            pattern: url
+        destino:
+            label: Destino do redirecionamento do link
+            type: select
+            values: { '_blank': "Nova Janela (aba)", '_self': "Mesma Janela" }
+            multiple: false
+            postfix: "<p><em>Escolha se ao clicar no link será direcionado para uma nova aba ou não</em></p>"
+    searchable: false
+    default_status: publish
+
 membros:
     name: Membros
     singular_name: Membro
@@ -272,7 +299,7 @@ config-assedio:
         facebook:
             type: text
             group: Redes Sociais
-        Yutube:
+        Youtube:
             type: text
             group: Redes Sociais
         Instagram:
@@ -286,6 +313,11 @@ config-assedio:
             type: image
             group: Logos
             postfix: "<p><em>Este é o logo principal do site, e não é recomendado alterar.</em></p>"
+        logo-site-horizontal:
+            label: Logo do Site na versão Horizontal (para mobile)
+            type: image
+            group: Logos
+            postfix: "<p><em>Este é o logo na versão horizontal, que é exibido em dispositivos com resoluções menores.</em></p>"
         logo-menu:
             label: Régua de logos do Menu
             type: image
@@ -329,5 +361,3 @@ config-assedio:
             type: textarea
             group: Página de Contato
     show_on_dashboard: false
-    searchable: false
-    viewless: true

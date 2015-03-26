@@ -1,0 +1,23 @@
+<div class="col-xs-12 slider-home carousel slide" id="slider-home" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% setcontent slides = 'slides/latest/5' %}
+        {% for item in slides %}
+            <a {% if item.redirecionamento is not empty %} {{ 'href=' ~ item.redirecionamento }} {% endif %} target="{{ item.destino }}"  class="item {% if loop.first %}active{% endif %} slider-item" style="background-image: url(files/{{ item.imagem }})">
+                <div class="slider-titulo">
+                    {{ item.titulo }}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#slider-home" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="right carousel-control" href="#slider-home" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Próximo</span>
+    </a>
+</div>
