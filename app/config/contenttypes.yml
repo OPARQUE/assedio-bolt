@@ -18,6 +18,9 @@ paginas:
         corpo:
             type: html
             height: 300px
+        template:
+            type: templateselect
+            filter: '*.twig'
     searchable: false
 
 noticias:
@@ -55,6 +58,8 @@ noticias:
             label: Selecione uma galeria
             postfix: "<p><em>Só escolha uma galeria caso a notícia precise exibir alguma.</em></p>"
     default_status: publish
+    record_template: noticias_page.twig
+    listing_template: noticias_page.twig
 
 projetos:
     name: Projetos

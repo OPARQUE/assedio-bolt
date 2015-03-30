@@ -301,6 +301,16 @@ form {
     color: @cor3;
     .height1;
 }
+.slider-itens-biblioteca {
+    &.slick-slider {
+        margin-bottom:0 !important;
+    }
+    .slick-dots {
+        top:0 !important;
+        bottom:auto !important;
+        text-align: right !important;
+    }
+}
 .bloco-agenda {
     background-color: @cor3;
     color: @cor4;
@@ -331,7 +341,10 @@ form {
 }
 .hashtags-rodape {
     overflow: hidden;
-    font-size:20px;
+    h3 {
+        font-size:20px;
+        margin-top:0;
+    }
 }
 
 

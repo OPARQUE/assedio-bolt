@@ -1,0 +1,38 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+<div class="col-sm-10 col-xs-12 central-home">
+    <div class="row">
+        <div class="col-xs-12 topo-nos" style="background-image: url({{image(record.imagem_destaque)}})"></div>
+        <div class="col-md-8 col-xs-6 corpo-nos">
+            <h2>{{record.titulo|upper}}</h2>
+            <hr>
+            {{record.corpo}}
+        </div>
+        <div class="col-md-4 col-xs-6 corpo-nos">
+            <img src="{{paths.theme}}assets/img/colabore.jpg" class="img-responsive"/>
+        </div>
+    </div>
+    <div class="row padding-bottom-2 link-preto-2">
+        <div class="col-xs-12">
+            <h2>LEIA OS ÚLTIMOS ARTIGOS DE NOSSOS COLABORADORES</h2>
+        </div>
+        {% setcontent noticias_col = 'noticias/latest/4' where { categorias: 'colaboradores' } %}
+        {% for item in noticias_col %}
+            <div class="col-md-2 col-sm-4 col-xs-6 card-noticia-colabore">
+                {% for categoria in item.taxonomy.categorias %}
+                    <h5>{{categoria|upper}}</h5>
+                {% endfor %}
+                <h2>
+                    <a href="{{item.link}}">
+                        {{item.titulo_destaque|upper}}
+                    </a>
+                </h2>
+                {{item.resumo|excerpt(140)}}
+                <br><a href="{{item.link}}">LEIA +</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'partials/_footer.twig' %}

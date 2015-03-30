@@ -1,0 +1,97 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12" style="height: 100%;">
+    <div class="row">
+        <div class="col-sm-2 sobre-projetos bg1 padding-top-1 padding-bottom-2 link-preto" style="height:100%;">
+            <h2 class="link-preto">
+                <a href="noticias.php">
+                    NOTÍCIAS
+                </a>
+            </h2>
+            <hr>
+            <a class="visible-xs" data-toggle="collapse" href="#menu-secundario-projetos" aria-expanded="false" aria-controls="menu-principal">
+                <span class="fa fa-bars fa-2x"></span>
+            </a>
+            <ul class="menu-secundario-projetos navbar-collapse collapse" id="menu-secundario-projetos">
+                <li>
+                    <a href="#"><span class="fa fa-angle-right"></span> NOTÍCIAS ESPECIAIS</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-angle-right"></span> NOTÍCIAS</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-angle-right"></span> COLABORADORES</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-angle-right"></span> COBERTURA</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-8 padding-bottom-2 corpo-projeto">
+            <div class="row">
+                <div class="col-xs-12 slider-home carousel slide" id="slider-home" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% setcontent especial = 'noticias/latest/3' where { categorias: 'noticias especiais' } %}
+
+                        {% for item in especial %}
+                            <div class="item {% if loop.first %}active {% endif %} slider-item" style="background-image: url({{image(item.imagem_destaque)}})">
+                                <div class="slider-titulo">
+                                    {{item.titulo_destaque}}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#slider-home" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="right carousel-control" href="#slider-home" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Próximo</span>
+                    </a>
+                </div>
+            </div>
+            <div class="row lista-noticias">
+                {% setcontent noticias = 'noticias/latest/5' where { categorias: '!agenda' } allowpaging %}
+                {% for item in noticias %}
+                    <div class="col-xs-12 item-lista-noticias">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>
+                                    <a href="{{item.link}}">{{item.titulo|upper}}</a>
+                                </h2>
+                                <div class="noticia-meta">
+                                    <span>{{item.datepublish|date('d/m/y - H\\hi')}}</span> 
+                                    {% for link, categoria in item.taxonomy.categorias %}
+                                        <a href="{{link}}">{{categoria|upper}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="resumo-noticia">
+                                    {{item.resumo|excerpt(260)}}
+                                    <br>
+                                    <a href="{{item.link}}" class="leia-mais">LEIA <span class="fa fa-plus"></span></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{{image(item.imagem_destaque)}}" class="img-responsive" />
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="paginacao-noticias">
+                    {{pager()}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sobre-projetos">
+            {% include 'partials/_sidebar_noticias.twig' %}
+        </div>
+    </div>
+</div>
+{% include 'partials/_footer.twig' %}

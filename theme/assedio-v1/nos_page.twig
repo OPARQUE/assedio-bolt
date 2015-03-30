@@ -1,0 +1,29 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+<div class="col-sm-10 col-xs-12 central-home">
+    <div class="row">
+        <div class="col-xs-12 topo-nos" style="background-image: url({{image(record.imagem_destaque)}})"></div>
+        <div class="col-md-6 col-xs-12 corpo-nos">
+            {{record.corpo}}
+        </div>
+        <div class="col-md-6 col-xs-12 corpo-nos-equipe">
+            <h2>{{record.titulo|upper}}</h2>
+            <hr>
+            <div class="row">
+                {% setcontent membros = 'membros' orderby 'datepublish' %}
+                {% for item in membros %}
+                    <div class="col-lg-4 col-md-6 text-center card-face-equipe">
+                        <img src='{{image(item.imagem)}}' class="img-responsive center-block"/>
+                        <h4>{{item.titulo}}</h4>
+                        <p>
+                            {{item.hashtags}}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+                
+{% include 'partials/_footer.twig' %}

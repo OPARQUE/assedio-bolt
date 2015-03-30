@@ -114,6 +114,18 @@ $(document).ready(function () {
             }
         ]
     });
+    
+    //Slider itens-biblioteca
+    $('.slider-itens-biblioteca').slick({
+        infinite: true,
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        pauseOnHover: true,
+        arrows: false,
+        fade: true,
+        dots: true
+    });
 
     function marginPrevSlickSlider() {
         var width = $(".sobre-projetos").width();

@@ -1,28 +1,30 @@
 {% include 'partials/_header.twig' %}
 {% include 'partials/_main_sidebar.twig' %}
 
+{% setcontent config = 'config-assedio/1' %}
 <div class="col-sm-7 col-xs-12 central-home">
     <div class="row">
 
         {% include 'partials/_slider_home.twig' %}
 
         {% setcontent noticias_noticia = 'noticias/latest/2' where { categorias: 'noticias' } %}
-        {{dump(noticias_noticia)}}
         {% for item in noticias_noticia %}
             <div class="col-md-6 col-xs-12 card-noticia">
                 <div class="row">
-                    <div class="col-xs-12 height1 card-imagem" style="background-image: url({{item.imagem_destaque}})">
+                    <div class="col-xs-12 height1 card-imagem" style="background-image: url(files/{{item.imagem_destaque}})">
                         <div class="overlay-card"></div>
                         <div class="card-data">
-                            <span>04</span>
-                            <span>JAN</span>
+                            <span>{{ item.datepublish|date("d")}}</span>
+                            <span class="text-uppercase">{{ item.datepublish|date("M")}}</span>
                         </div>
                         <div class="row">
                             <div class="col-xs-8 col-md-6 card-titulo">
-                                <h5 class="cor1">
-                                    {{item.taxonomy.categorias[0]}}
+                                <h5 class="cor1 text-uppercase">
+                                    {% for categoria in item.taxonomy.categorias %}
+                                        {{categoria}}
+                                    {% endfor %}
                                 </h5>
-                                <h3 class="cor4">
+                                <h3 class="cor4 text-uppercase">
                                     <a href="{{item.link}}">{{item.titulo_destaque}}</a>
                                 </h3>
                             </div>
@@ -31,49 +33,109 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="col-md-6 col-xs-12 card-noticia">
-            <div class="row">
-                <div class="col-xs-12 height1 card-imagem" style="background-image: url(assets/img/post-3.jpg)">
-                    <div class="overlay-card"></div>
-                    <div class="card-data pull-right">
-                        <span>04</span>
-                        <span>JAN</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8 col-md-6 card-titulo-especial">
-                            <h5 class="cor1">
-                                NOTÍCIA ESPECIAL
-                            </h5>
-                            <h3 class="cor4">
-                                <a href="noticia.php">PRÊMIO JOVEM ARTICULADOR</a>
-                            </h3>
+        {% setcontent noticias_especial = 'noticias/latest/2' where { categorias: 'noticias especiais' } %}
+        {% for item in noticias_especial %}
+            <div class="col-md-6 col-xs-12 card-noticia">
+                <div class="row">
+                    <div class="col-xs-12 height1 card-imagem" style="background-image: url(files/{{item.imagem_destaque}})">
+                        <div class="overlay-card"></div>
+                        <div class="card-data pull-right">
+                            <span>{{ item.datepublish|date("d")}}</span>
+                            <span class="text-uppercase">{{ item.datepublish|date("M")}}</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8 col-md-6 card-titulo-especial">
+                                <h5 class="cor1 text-uppercase">
+                                    {% for categoria in item.taxonomy.categorias %}
+                                        {{categoria}}
+                                    {% endfor %}
+                                </h5>
+                                <h3 class="cor4 text-uppercase">
+                                    <a href="{{item.link}}">{{item.titulo_destaque}}</a>
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-xs-12 card-noticia">
-            <div class="row">
-                <div class="col-xs-12 height1 card-imagem" style="background-image: url(assets/img/post-4.jpg)">
-                    <div class="overlay-card"></div>
-                    <div class="card-data pull-right">
-                        <span>04</span>
-                        <span>JAN</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8 col-md-6 card-titulo-especial">
-                            <h5 class="cor1">
-                                NOTÍCIA ESPECIAL
-                            </h5>
-                            <h3 class="cor4">
-                                <a href="noticia.php">GENTE FINA NA CASA LIBRE</a>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-sm-3 col-xs-12 direita-home">
+    <div class="row slider-itens-biblioteca">
+        {% setcontent biblioteca = 'itens_biblioteca/latest/4' %}
+        {% for item in biblioteca %}
+            <div class="col-xs-12 bloco-biblioteca link-preto">
+                <h5>BIBLIOTECA</h5>
+                <span class="fa fa-4x {{item.icone}}"></span>
+                <h2>
+                    <a href="{{item.link}}">
+                        {{item.resumo|excerpt(60)}}
+                    </a>
+                </h2>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-xs-12 bloco-agenda">
+            <h5>AGENDA</h5>
+            <div>
+                {% setcontent agenda = 'noticias' where { categorias: 'agenda', data: '>=today' } limit 3 %}
+                {% if agenda is not empty %}
+                    {% for item in agenda %}
+                        <h3>
+                            <span class="data-agenda cor2">
+                                {{ item.data|date("d/m")}}
+                            </span> 
+                            <span class="link-branco">
+                                <a href="{{item.link}}">{{item.titulo_destaque}}</a>
+                            </span>
+                        </h3>
+                    {% endfor %}
+                {% else %}
+                    <h3 class="">Nenhum evento próximo</h3>
+                    {% setcontent agenda_link = 'noticias/latest/1' where { categorias: 'agenda' } returnsingle %}
+                    {% for link, categoria in agenda_link.taxonomy.categorias %}
+                        <a href="{{link}}" class="btn btn-danger link-branco">Veja toda nossa agenda</a>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 bloco-parceiros">
+            <h5>PARCEIROS DO <img src="{{paths.theme}}assets/img/icone-logo-preto.png" width="20" style="margin-top: -5px;margin-left: 5px;" /></h5>
+            <img src="{{paths.theme}}assets/img/logo-libre.png" class="img-responsive center-block"/>
+        </div>
+    </div>
 </div>
-
+<div class="col-md-10 col-xs-12 rodape-home">
+    <div class="row">
+        <div class="col-md-5 col-sm-6 col-xs-8">
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="{{image(config.logo_assedio_rodape)}}" class="img-responsive pull-right"/>
+                </div>
+                <div class="col-xs-8">
+                    <p>{{config.desc_rodape}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-4 hashtags-rodape link-preto">
+            {{config.hashtags|raw}}
+        </div>
+        <div class="col-md-5 col-xs-12">
+            <a href="/pagina/projetos">
+                <img src="{{image(config.logo_rodape)}}" class="img-responsive"/>
+            </a>
+        </div>
+    </div>
+    <div class="row padding-top-1">
+        <div class="col-xs-12">
+            <a href="http://www.oparque.art.br" target="_blank" class="pull-right">
+                <img src="{{paths.theme}}assets/img/creditos-oparque.png" />
+            </a>
+        </div>
+    </div>
+</div>
 {% include 'partials/_footer.twig' %}

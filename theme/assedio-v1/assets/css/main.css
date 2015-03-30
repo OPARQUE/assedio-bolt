@@ -303,6 +303,14 @@ form input {
   /*min-height: @height1;*/
   height: 240px;
 }
+.slider-itens-biblioteca.slick-slider {
+  margin-bottom: 0 !important;
+}
+.slider-itens-biblioteca .slick-dots {
+  top: 0 !important;
+  bottom: auto !important;
+  text-align: right !important;
+}
 .bloco-agenda {
   background-color: #000000;
   color: #ffffff;
@@ -335,7 +343,10 @@ form input {
 }
 .hashtags-rodape {
   overflow: hidden;
+}
+.hashtags-rodape h3 {
   font-size: 20px;
+  margin-top: 0;
 }
 /* NOSSOS PROJETOS */
 .menu-secundario-projetos {
