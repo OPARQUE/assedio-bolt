@@ -1,0 +1,76 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12">
+    <div class="row">
+        <div class="col-sm-2" style="z-index: 2;">
+            <div class="row sobre-projetos bg4 padding-top-1 padding-bottom-2 link-preto-2">
+                <div class="col-xs-12">
+                    {% setcontent biblioteca = 'pagina/biblioteca' %}
+                    <h2 class="link-preto">
+                        <a href="{{biblioteca.link}}">
+                            {{biblioteca.titulo|upper}}
+                        </a>
+                    </h2>
+                    {{biblioteca.corpo}}
+                    <hr>
+                    <a class="visible-xs" data-toggle="collapse" href="#menu-secundario-projetos" aria-expanded="false" aria-controls="menu-principal">
+                        <span class="fa fa-bars fa-2x"></span>
+                    </a>
+                    <ul class="menu-secundario-projetos navbar-collapse collapse" id="menu-secundario-projetos">
+                        {% setcontent itens_biblioteca = 'itens_biblioteca' %}
+                        {% for item in itens_biblioteca %}
+                            <li>
+                                <a href="{{paths.rooturl}}{{item.link_biblioteca}}"><span class="fa fa-angle-right"></span> {{item.titulo|upper}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 padding-top-1 padding-bottom-2 card-biblioteca biblioteca-ativo">
+            {% setcontent fotos = 'itens_biblioteca/fotos' %}
+            <div class="logo-card-biblioteca text-center padding-top-2">
+                <span class="fa fa-4x {{fotos.icone}}"></span>
+            </div>
+            <h2 class="margin-bottom-2">
+                {{fotos.titulo|upper}}
+            </h2>
+            <p>
+                {{fotos.resumo}}
+            </p>
+        </div>
+        <div class="col-sm-8 padding-top-1 padding-bottom-2 corpo-projeto">
+            {% setcontent itens_fotos = 'fotos/latest/5' allowpaging %}
+            {% for item in itens_fotos %}
+                <div class="row link-preto card-corpo-lista-biblioteca">
+                    <div class="col-xs-12">
+                        <h2 class="cor1">{{item.titulo|upper}}</h2>
+                        <div>
+                            {{item.corpo}}
+                        </div>
+                        {% set galerias = item.related('galerias') %}
+                        {% if galerias is not empty %}
+                            {% set galeria = galerias.0 %}
+                            <div class="row padding-top-2">
+                                <div class="col-xs-12">
+                                    <h4>{{galeria.titulo|upper}}</h4>
+                                </div>
+                                {% for imagem in galeria.imagens %}
+                                    <div class="{% if galeria.colunas == '2' %}col-md-6 col-sm-6 col-xs-12 {% elseif galeria.colunas == '3' %}col-md-4 col-sm-4 col-xs-6 {% elseif galeria.colunas == '4' %}col-md-3 col-sm-4 col-xs-6 {% elseif galeria.colunas == '6' %}col-md-2 col-sm-4 col-xs-6 {% else %}col-md-2 col-sm-4 col-xs-6 {% endif %}margin-bottom-1">
+                                        <a href="{{image(imagem)}}" class="magnific">
+                                            <img src="{{image(imagem)}}" class="img-responsive"/>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {{pager()}}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'partials/_footer.twig' %}

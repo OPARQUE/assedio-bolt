@@ -1,24 +1,6 @@
-<div class="row card-agenda">
+<div class="row bloco-agenda">
     <div class="col-xs-12">
-        <h4>AGENDA</h4>
-        <a href="#" class="item-agenda">
-            <h1>02/01</h1>
-            <p>
-                <span class="titulo-item-agenda">Reunião pós produção</span>
-            </p>
-        </a>
-        <a href="#" class="item-agenda">
-            <h1>16/02</h1>
-            <p>
-                <span class="titulo-item-agenda">Karaokê libre</span>
-            </p>
-        </a>
-        <a href="#" class="item-agenda">
-            <h1>27/02</h1>
-            <p>
-                <span class="titulo-item-agenda">Desconferência</span>
-            </p>
-        </a>
+        {% include 'partials/_agenda.twig' %}
     </div>
 </div>
 <div class="row">
@@ -28,9 +10,7 @@
 </div>
 <div class="row">
     <div class="col-xs-12 card-colabore">
-        <h1>COLABORE</h1>
-        <p>
-            O Site do Assédio Coletivo é uma plataforma aberta a colaborações de agentes culturais e grupos que estejam interessados em escrever sobre temas de seu cotidiano e compartilhar suas vivências sociais, culturais e colaborativas. Você pode entrar em contato conosco e fazer sua proposta de colaboração para nosso site - assim que possível nossa equipe irá retornar e orientar os próximos passos.
-        </p>
+        {% setcontent info_noticias = 'pagina/noticias' %}
+        {{info_noticias.corpo}}
     </div>
 </div>

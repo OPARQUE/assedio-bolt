@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Bolt\\Extensions\\Colourpicker\\' => array($vendorDir . '/bolt/colourpicker'),
+    'Bolt\\Extension\\Bolt\\SimpleForms\\' => array($vendorDir . '/bolt/simpleforms'),
     'Bolt\\Composer\\' => array($baseDir . '/'),
 );

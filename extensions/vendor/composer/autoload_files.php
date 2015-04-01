@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     $vendorDir . '/bolt/colourpicker/init.php',
+    $vendorDir . '/bolt/simpleforms/init.php',
 );

@@ -6,8 +6,9 @@
     <div class="row">
         <div class="col-sm-2 sobre-projetos bg1 padding-top-1 padding-bottom-2 link-preto" style="height:100%;">
             <h2 class="link-preto">
-                <a href="noticias.php">
-                    NOTÍCIAS
+                {% setcontent info_noticias = 'pagina/noticias' %}
+                <a href="{{info_noticias.link}}">
+                    {{info_noticias.titulo|upper}}
                 </a>
             </h2>
             <hr>
@@ -15,46 +16,16 @@
                 <span class="fa fa-bars fa-2x"></span>
             </a>
             <ul class="menu-secundario-projetos navbar-collapse collapse" id="menu-secundario-projetos">
-                <li>
-                    <a href="#"><span class="fa fa-angle-right"></span> NOTÍCIAS ESPECIAIS</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-angle-right"></span> NOTÍCIAS</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-angle-right"></span> COLABORADORES</a>
-                </li>
-                <li>
-                    <a href="#"><span class="fa fa-angle-right"></span> COBERTURA</a>
-                </li>
+                {% for categoria in app.config.get('taxonomy/categorias/options') %}
+                    <li>
+                        <a href="{{paths.rooturl}}categorias/{{ categoria|slug }}"><span class="fa fa-angle-right"></span> {{ categoria|upper }}</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="col-sm-8 padding-bottom-2 corpo-projeto">
             <div class="row">
-                <div class="col-xs-12 slider-home carousel slide" id="slider-home" data-ride="carousel">
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        {% setcontent especial = 'noticias/latest/3' where { categorias: 'noticias especiais' } %}
-
-                        {% for item in especial %}
-                            <div class="item {% if loop.first %}active {% endif %} slider-item" style="background-image: url({{image(item.imagem_destaque)}})">
-                                <div class="slider-titulo">
-                                    {{item.titulo_destaque}}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#slider-home" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Anterior</span>
-                    </a>
-                    <a class="right carousel-control" href="#slider-home" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Próximo</span>
-                    </a>
-                </div>
+                {% include 'partials/_slider_noticias_especiais.twig' %}
             </div>
             <div class="row lista-noticias">
                 {% setcontent noticias = 'noticias/latest/5' where { categorias: '!agenda' } allowpaging %}
@@ -85,7 +56,7 @@
                 {% endfor %}
 
                 <div class="paginacao-noticias">
-                    {{pager()}}
+                    {{pager('', 3, 'partials/_paginacao.twig')}}
                 </div>
             </div>
         </div>

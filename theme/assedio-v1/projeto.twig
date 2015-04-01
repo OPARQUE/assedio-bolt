@@ -1,0 +1,41 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12">
+    <div class="row">
+        <div class="col-sm-2 sobre-projetos bg4 padding-top-1 padding-bottom-2 link-preto-2">
+            {% setcontent info_projetos = 'pagina/projetos' %}
+            {{info_projetos.corpo}}
+            <hr>
+            <a class="visible-xs" data-toggle="collapse" href="#menu-secundario-projetos" aria-expanded="false" aria-controls="menu-principal">
+                <span class="fa fa-bars fa-2x"></span> <span class="fa-2x">OUTROS PROJETOS</span>
+            </a>
+            <ul class="menu-secundario-projetos navbar-collapse collapse" id="menu-secundario-projetos">
+                {% setcontent projetos = 'projetos' %}
+                {% for item in projetos%}
+                    <li>
+                        <a href="{{item.link}}"><span class="fa fa-angle-right"></span> {{item.titulo|upper}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-2 padding-top-1 padding-bottom-2 card-projeto cor4" style="background-image: url({{image(record.imagem_destaque)}});">
+            <div class="logo-card-projeto">
+                {% if record.logo != '' %}
+                    <img src="{{image(record.logo)}}" class="img-responsive" />
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-sm-8 padding-top-1 padding-bottom-2 corpo-projeto">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <h2>{{record.titulo|upper}}</h2>
+                    {{record.corpo}}
+                </div>
+            </div>
+            {% include 'partials/_galeria.twig' %}
+        </div>
+    </div>
+</div>
+{% include 'partials/_footer.twig' %}

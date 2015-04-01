@@ -58,7 +58,7 @@ noticias:
             label: Selecione uma galeria
             postfix: "<p><em>Só escolha uma galeria caso a notícia precise exibir alguma.</em></p>"
     default_status: publish
-    record_template: noticias_page.twig
+    record_template: noticia.twig
     listing_template: noticias_page.twig
 
 projetos:
@@ -104,6 +104,8 @@ projetos:
             multiple: false
             label: Selecione uma galeria
             postfix: "<p><em>Só escolha uma galeria caso o projeto precise exibir alguma.</em></p>"
+    record_template: projeto.twig
+    listing_template: projetos_page.twig
 
 itens-biblioteca:
     name: Itens da Biblioteca
@@ -118,11 +120,16 @@ itens-biblioteca:
             uses: titulo
         resumo:
             type: textarea
+        link-biblioteca:
+            label: Parâmetro para o link da biblioteca
+            type: text
+            postfix: "<p><em>Inserir o último parâmetro da URL do tipo de item da biblioteca. (Ex: <code>projetos-aprovados</code></em></p>"
         icone:
             label: Ícone
             type: text
             postfix: "<p><em>Escolha o código de um ícone do <a href='http://fontawesome.io/icons/' target='_blank'>Font Awesome</a>. Ex:</em> <code>fa-diamond</code></p>"
     searchable: false
+    listing_template: biblioteca_page.twig
 
 # Tipos de itens da biblioteca
 # Cada tipo de conteúdo abaixo é um item da biblioteca
@@ -143,6 +150,8 @@ projetos-aprovados:
             height: 300px
         arquivo:
             type: file
+    record_template: projetos_aprovados_page.twig
+    listing_template: projetos_aprovados_page.twig
 
 outros-conteudos:
     name: Bib - Outros Conteúdos
@@ -161,6 +170,8 @@ outros-conteudos:
             height: 300px
         arquivo:
             type: file
+    record_template: outros_conteudos_page.twig
+    listing_template: outros_conteudos_page.twig
 
 linkerias:
     name: Bib - Linkerias
@@ -177,6 +188,8 @@ linkerias:
             height: 300px
             postfix: "<p><em>Todos os links são inseridos no corpo.</em></p>"
     default_status: publish
+    record_template: linkerias_page.twig
+    listing_template: linkerias_page.twig
 
 fotos:
     name: Bib - Fotos
@@ -197,6 +210,8 @@ fotos:
         galerias:
             multiple: false
             label: Escolha uma galeria
+    record_template: fotos_page.twig
+    listing_template: fotos_page.twig
 
 videos:
     name: Bib - Vídeos
@@ -215,6 +230,8 @@ videos:
             height: 300px
         video:
             type: video
+    record_template: videos_page.twig
+    listing_template: videos_page.twig
 # --/
 
 galerias:
@@ -234,7 +251,7 @@ galerias:
         colunas:
             type: select
             values: [ 2, 3, 4, 6 ]
-            postfix: "<p><em>Número de colunas que a galeria terá.</em></p>"
+            postfix: "<p><em>Número de colunas que a galeria terá. Caso a galeria esteja sendo criada para ser incluída no item FOTOS da Biblioteca, recomenda-se escolher 6 colunas.</em></p>"
     searchable: false
     default_status: publish
 

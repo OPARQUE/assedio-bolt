@@ -74,6 +74,12 @@ and open the template in the editor.
 .link-rosa a:hover {
   color: #ffffff;
 }
+.link-rosa-2 a {
+  color: #ec7e8b;
+}
+.link-rosa-2 a:hover {
+  color: #df253b;
+}
 .link-neutro a:hover {
   color: #000000;
 }
@@ -256,6 +262,12 @@ form input {
 }
 .card-titulo-especial a:hover {
   color: #ec7e8b;
+}
+.card-data-agenda {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  max-width: 180px;
+  width: auto;
 }
 .overlay-card {
   position: absolute;
@@ -561,5 +573,28 @@ a.item-agenda {
 }
 .noticias-relacionadas .card-noticia-colabore:last-child {
   border-right: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #ec7e8b;
+  border-color: #ec7e8b;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  color: #fff;
+  background-color: #ec7e8b;
+  border-color: #ec7e8b;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  background-color: #f3aab3;
+  border-color: #ec7e8b;
+  color: #fff;
 }
 /*# sourceMappingURL=main.css.map */

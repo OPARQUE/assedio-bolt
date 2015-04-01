@@ -1,0 +1,95 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12">
+    <div class="row">
+        <div class="col-md-2 col-sm-4 sobre-projetos bg1 padding-top-1 padding-bottom-2 link-preto">
+            <h2 class="link-preto">
+                {% setcontent info_noticias = 'pagina/noticias' %}
+                <a href="{{info_noticias.link}}">
+                    {{info_noticias.titulo|upper}}
+                </a>
+            </h2>
+            <hr>
+            <a class="visible-xs" data-toggle="collapse" href="#menu-secundario-projetos" aria-expanded="false" aria-controls="menu-principal">
+                <span class="fa fa-bars fa-2x"></span>
+            </a>
+            <ul class="menu-secundario-projetos navbar-collapse collapse" id="menu-secundario-projetos">
+                {% for categoria in app.config.get('taxonomy/categorias/options') %}
+                    <li>
+                        <a href="{{paths.rooturl}}categorias/{{ categoria|slug }}"><span class="fa fa-angle-right"></span> {{ categoria|upper }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-8 padding-bottom-2 corpo-projeto">
+
+            <div class="row lista-noticias">
+                <div class="col-xs-12 item-lista-noticias">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>
+                                {{record.titulo|upper}}
+                            </h1>
+                            <div class="noticia-meta">
+                                <span>{{record.datepublish|date('d/m/y - H\\hi')}}</span> 
+                                {% for link, categoria in record.taxonomy.categorias %}
+                                    <a href="{{link}}">{{categoria|upper}}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            {% if record.imagem_destaque != '' %}
+                                <img src="{{image(record.imagem_destaque)}}" class="img-responsive" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12 padding-top-2">
+                            <div class="resumo-noticia">
+                                {% if record.data != '' %}
+                                    <div class="card-data-agenda">
+                                        <h4>Data do evento:</h4>
+                                        <h2 class="cor1">{{record.data|date('d/m/Y')}}</h2>
+                                    </div>
+                                    <hr>
+                                {% endif %}
+                                {{record.corpo}}
+                            </div>
+                        </div>
+                    </div>
+                    {% include 'partials/_galeria.twig' %}
+                </div>
+            </div>
+            <div class="row padding-bottom-2 noticias-relacionadas">
+                {% set relationstags = record.taxonomy.tags|join(" || ") %}
+                {% setcontent relacionados = "noticias" where { id: '!' ~record.id , tags: relationstags } limit 3 %}
+                {% if relacionados is not empty %}
+                    <div class="col-xs-12">
+                        <h2>RELACIONADOS</h2>
+                    </div>
+                    {% for item in relacionados %}
+                        <div class="col-md-4 col-sm-6 col-xs-12 card-noticia-colabore">
+                            {% for link, categoria in item.taxonomy.categorias %}
+                                <h5>
+                                    <a href="{{link}}">{{categoria|upper}}</a>
+                                </h5>
+                            {% endfor %}
+                            <h2>
+                                <a href="{{item.link}}">
+                                    {{item.titulo|upper}}
+                                </a>
+                            </h2>
+                            {{item.corpo|excerpt(240)}}
+                            <br>
+                            <a href="{{item.link}}">LEIA +</a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12 sidebar-direita-noticias">
+            {% include 'partials/_sidebar_noticias.twig' %}
+        </div>
+    </div>
+</div>
+{% include 'partials/_footer.twig' %}

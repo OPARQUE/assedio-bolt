@@ -1,109 +1,86 @@
-{% include '_header.twig' %}
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
 
-<!-- Main Page Content and Sidebar -->
-
-    <!-- Main Blog Content -->
-    <div class="large-8 columns" role="content">
-
-        {# This template is used for 'listings': Generic pages that list a number of
-           records from a certain contenttype. These records are available as an array
-           called 'records'. In the for-loop below, we iterate over the records that
-           are on this page. It can be used for overview pages like 'all entries', or
-           'all records tagged with kittens' as well as search result. #}
-
-        {# if used for listing a taxonomy: #}
-        {% if taxonomytype is defined %}
-            <h1>
-                {{ __('Overview for') }}
-                {% if taxonomy.options[slug] is defined %}
-                    {{ taxonomy.options[slug] }}
-                {% else %}
-                    {{ slug }}
-                {% endif %}
-            </h1>
-            {# taxonomies are fetched unordered by design. If we specified an order in config.yml, sort them here: #}
-            {% set records = records|order(app.config.get('general/listing_sort')) %}
-        {% endif %}
-
-        {# This is also the default template for searchresults. If 'search' is defined,
-           we display an appropriate title. The 'records' array contains all of the
-           records matching the current query. If there are no results, the
-           code in the 'else' part of the for-loop is used. #}
-        {% if search is defined %}
-            <h1>
-                {{ __('Search results for <b> %search% </b>.', { '%search%': search|escape }) }}
-            </h1>
-        {% endif %}
-
-
-        {% for record in records %}
-            <article>
-
-                <h2><a href="{{ record.link }}">{{ record.title }}</a></h2>
-
-                {% if record.image!="" %}
-                    <div class="large-4 imageholder">
-                        <a href="{{ image(record.image) }}">
-                            <img src="{{ thumbnail(record.image, 400, 260) }}">
-                        </a>
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12" style="height: 100%;">
+    <div class="row">
+        <div class="col-sm-2 sobre-projetos bg1 padding-top-1 padding-bottom-2 link-preto" style="height:100%;">
+            <h2 class="link-preto">
+                {% setcontent info_noticias = 'pagina/noticias' %}
+                <a href="{{info_noticias.link}}">
+                    {{info_noticias.titulo|upper}}
+                </a>
+            </h2>
+            <hr>
+            <a class="visible-xs" data-toggle="collapse" href="#menu-secundario-projetos" aria-expanded="false" aria-controls="menu-principal">
+                <span class="fa fa-bars fa-2x"></span>
+            </a>
+            <ul class="menu-secundario-projetos navbar-collapse collapse" id="menu-secundario-projetos">
+                {% for categoria in app.config.get('taxonomy/categorias/options') %}
+                    <li>
+                        <a href="{{paths.rooturl}}categorias/{{ categoria|slug }}"><span class="fa fa-angle-right"></span> {{ categoria|upper }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-8 padding-bottom-2 corpo-projeto">
+            <div class="row lista-noticias">
+                <div class="col-xs-12">
+                    {% if taxonomytype is defined %}
+                        <h1 class="cor1">
+                            {% if taxonomy.options[slug] is defined %}
+                                {{ taxonomy.options[slug]|upper }}
+                            {% else %}
+                                {{ slug|upper }}
+                            {% endif %}
+                        </h1>
+                        <hr>
+                        {# taxonomies are fetched unordered by design. If we specified an order in config.yml, sort them here: #}
+                        {% set records = records|order(app.config.get('general/listing_sort')) %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row lista-noticias">
+                {% for item in records %}
+                    <div class="col-xs-12 item-lista-noticias">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>
+                                    <a href="{{item.link}}">{{item.titulo|upper}}</a>
+                                </h2>
+                                <div class="noticia-meta">
+                                    <span>{{item.datepublish|date('d/m/y - H\\hi')}}</span> 
+                                    {% for link, categoria in item.taxonomy.categorias %}
+                                        <a href="{{link}}">{{categoria|upper}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="resumo-noticia">
+                                    {{item.resumo|excerpt(260)}}
+                                    <br>
+                                    <a href="{{item.link}}" class="leia-mais">LEIA <span class="fa fa-plus"></span></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                {% if item.imagem_destaque != '' %}
+                                <img src="{{image(item.imagem_destaque)}}" class="img-responsive" />
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if records is empty %}
+                    <div class="col-xs-12 item-lista-noticias">
+                        <h3>Nenhum artigo encontrado para o critério selecionado</h3>
                     </div>
                 {% endif %}
-
-                {# display something introduction-like.. #}
-                {% if record.introduction %}
-                    {{ record.introduction }}
-                {% elseif record.teaser %}
-                    {{ record.teaser }}
-                {% else %}
-                    <p>{{ record.excerpt(300) }}</p>
-                {% endif %}
-
-                {% include '_recordfooter.twig' with {'record': record} %}
-
-            </article>
-
-            <hr>
-
-        {% else %}
-            <article>
-
-
-                {% if search is defined %}
-
-                    <p>
-                        {{ __("No results found for '%search%'. Please try another search.", { '%search%': search|escape }) }}
-                    </p>
-
-                {% else %}
-
-                    <h2>{{ __("No content found.") }}</h2>
-
-                    <p>
-                        {{ __("Unfortunately, no content could be found. Try another page, or go to the <a href=\"%paths_root%\">homepage</a>.", {'%paths_root%': paths.root} ) }}
-                    </p>
-
-                {% endif %}
-
-                {#
-                optionally, you can redirect the browser to another page. Just uncomment the next line to do so.
-                {{ redirect('/') }}
-                #}
-
-            </article>
-        {% endfor %}
-
-        {# If there are more records than will fit on one page, the pager is shown. #}
-        {{ pager() }}
-
-
+                <div class="paginacao-noticias">
+                    {{pager('', 3, 'partials/_paginacao.twig')}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sobre-projetos">
+            {% include 'partials/_sidebar_noticias.twig' %}
+        </div>
     </div>
-
-    <!-- End Main Content -->
-
-    {% include '_aside.twig' %}
-
-<!-- End Main Content and Sidebar -->
-
-
-
-{% include '_footer.twig' %}
+</div>
+{% include 'partials/_footer.twig' %}

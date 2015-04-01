@@ -78,28 +78,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12 bloco-agenda">
-            <h5>AGENDA</h5>
-            <div>
-                {% setcontent agenda = 'noticias' where { categorias: 'agenda', data: '>=today' } limit 3 %}
-                {% if agenda is not empty %}
-                    {% for item in agenda %}
-                        <h3>
-                            <span class="data-agenda cor2">
-                                {{ item.data|date("d/m")}}
-                            </span> 
-                            <span class="link-branco">
-                                <a href="{{item.link}}">{{item.titulo_destaque}}</a>
-                            </span>
-                        </h3>
-                    {% endfor %}
-                {% else %}
-                    <h3 class="">Nenhum evento próximo</h3>
-                    {% setcontent agenda_link = 'noticias/latest/1' where { categorias: 'agenda' } returnsingle %}
-                    {% for link, categoria in agenda_link.taxonomy.categorias %}
-                        <a href="{{link}}" class="btn btn-danger link-branco">Veja toda nossa agenda</a>
-                    {% endfor %}
-                {% endif %}
-            </div>
+            {% include 'partials/_agenda.twig' %}
         </div>
     </div>
     <div class="row">

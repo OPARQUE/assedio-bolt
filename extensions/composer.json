@@ -13,7 +13,7 @@
         "preferred-install": "dist"
     },
     "provide": {
-        "bolt/bolt": "2.1.1"
+        "bolt/bolt": "2.1.3"
     },
     "extra": {
         "bolt-web-path": ".././"
@@ -28,6 +28,7 @@
         "post-package-update": "Bolt\\Composer\\ExtensionInstaller::handle"
     },
     "require": {
-        "bolt/colourpicker": "~1.0"
+        "bolt/colourpicker": "~1.0",
+        "bolt/simpleforms": "0.12.*"
     }
 }
