@@ -370,6 +370,7 @@ form input {
 .card-projeto {
   position: relative;
   display: block;
+  min-height: 400px;
   background-size: cover;
   background-position: 50% bottom;
   -webkit-hyphens: auto;
@@ -421,6 +422,7 @@ form input {
 .card-biblioteca {
   display: block;
   background-color: #ec7e8b;
+  min-height: 400px;
   color: #000000;
   overflow: hidden;
   padding-left: 30px;
@@ -479,7 +481,6 @@ form input {
 }
 /* COLABORE */
 .card-noticia-colabore {
-  border-right: 1px solid #000000;
   margin-bottom: 20px;
 }
 /* NOTÍCIAS */

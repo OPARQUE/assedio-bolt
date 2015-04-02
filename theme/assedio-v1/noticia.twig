@@ -65,7 +65,7 @@
                 {% setcontent relacionados = "noticias" where { id: '!' ~record.id , tags: relationstags } limit 3 %}
                 {% if relacionados is not empty %}
                     <div class="col-xs-12">
-                        <h2>RELACIONADOS</h2>
+                        <h2 class="cor1">RELACIONADOS</h2>
                     </div>
                     {% for item in relacionados %}
                         <div class="col-md-4 col-sm-6 col-xs-12 card-noticia-colabore">

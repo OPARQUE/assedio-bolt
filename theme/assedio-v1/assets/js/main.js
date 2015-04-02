@@ -1,14 +1,14 @@
 $(document).ready(function () {
-    
+
     $('.magnific, div.imageholder a').magnificPopup({
         type: 'image'
     });
-    
+
     var logoWidth1 = $(".logo-width1");
     var logoWidth2 = $(".logo-width2");
-    
+
     function widthLogo() {
-        
+
         if ($(logoWidth1).is(":visible")) {
             var logoMargin = $(".logo-width1").offset().left - 15;
             var logoWidth = $(".logo-width1").width();
@@ -114,7 +114,7 @@ $(document).ready(function () {
             }
         ]
     });
-    
+
     //Slider itens-biblioteca
     $('.slider-itens-biblioteca').slick({
         infinite: true,
@@ -129,18 +129,18 @@ $(document).ready(function () {
 
     function marginPrevSlickSlider() {
         var width = $(".sobre-projetos").width();
-        
+
         if ($(window).width() > 768) {
             $(".slick-prev").css("left", width);
         } else if ($(window).width() < 768) {
             $(".slick-prev").css("left", 0);
         }
-        
+
     }
-    
+
     function heightMap() {
         var height = $(window).height();
-        
+
         if ($(window).width() > 991) {
             $("#mapa-galpao").css("height", height);
             $(".about-contato-direita").css("height", height);

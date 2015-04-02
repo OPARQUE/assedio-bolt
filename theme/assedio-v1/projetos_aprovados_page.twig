@@ -45,13 +45,13 @@
             {% setcontent itens_aprovados = 'projetos_aprovados/latest/5' allowpaging %}
             {% for item in itens_aprovados %}
                 <div class="row link-preto card-corpo-lista-biblioteca">
-                    <div class="col-md-8 col-xs-10">
+                    <div class="col-md-8 col-xs-9">
                         <h2>{{item.titulo|upper}}</h2>
                         <p>
                             {{item.corpo}}
                         </p>
                     </div>
-                    <a href="{{paths.files}}{{item.arquivo}}" target="_blank" download class="col-md-4 col-xs-2 text-center padding-top-1">
+                    <a href="{{paths.files}}{{item.arquivo}}" target="_blank" download class="col-md-4 col-xs-3 text-center padding-top-1">
                         <span class="fa fa-4x fa-arrow-down"></span><br>
                         <h4>BAIXE AQUI</h4>
                     </a>
