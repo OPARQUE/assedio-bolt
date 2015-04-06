@@ -28,6 +28,7 @@
         "post-package-update": "Bolt\\Composer\\ExtensionInstaller::handle"
     },
     "require": {
+        "bolt/boltforms": "~2.1",
         "bolt/colourpicker": "~1.0",
         "bolt/simpleforms": "0.12.*"
     }

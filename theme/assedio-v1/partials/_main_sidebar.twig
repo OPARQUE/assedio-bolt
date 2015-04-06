@@ -8,8 +8,8 @@
             </a>
         </div>
         <div class="col-xs-12 margin-bottom-1 margin-top-1 link-branco">
-            <form class="">
-                <input class="pull-left input-busca-width center-block" type="text" placeholder="buscar..."/>
+            <form action="{{ paths.root }}search">
+                <input class="pull-left input-busca-width center-block" type="text" name="q" placeholder="buscar..." value="{{ search }}"/>
             </form>
             <a class="visible-xs pull-left" style="margin-left: 10px;" data-toggle="collapse" href="#menu-principal" aria-expanded="false" aria-controls="menu-principal">
                 <span class="fa fa-bars fa-2x"></span>

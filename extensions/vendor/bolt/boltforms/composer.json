@@ -1,0 +1,37 @@
+{
+	"name" : "bolt/boltforms",
+	"description" : "Symfony Forms API for bolt",
+	"type" : "bolt-extension",
+	"keywords" : [
+		""
+	],
+	"require" : {
+		"bolt/bolt" : ">=2.1.0,<3.0.0"
+	},
+	"license" : "GPL-3.0+",
+	"authors" : [{
+			"name" : "Gawain Lynch",
+			"email" : "gawain.lynch@gmail.com"
+		}
+	],
+	"minimum-stability" : "dev",
+	"prefer-stable" : true,
+	"autoload" : {
+		"files" : [
+			"init.php"
+		],
+		"psr-4" : {
+			"Bolt\\Extension\\Bolt\\BoltForms\\" : [
+				"",
+				"src/"
+			],
+			"Bolt\\Extension\\Bolt\\BoltForms\\Tests\\" : "tests/",
+			"ReCaptcha\\" : "lib/ReCaptcha/"
+		}
+	},
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "2.2.*-dev"
+		}
+	}
+}

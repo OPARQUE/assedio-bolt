@@ -6,7 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ReCaptcha\\' => array($vendorDir . '/bolt/boltforms/lib/ReCaptcha'),
     'Bolt\\Extensions\\Colourpicker\\' => array($vendorDir . '/bolt/colourpicker'),
     'Bolt\\Extension\\Bolt\\SimpleForms\\' => array($vendorDir . '/bolt/simpleforms'),
+    'Bolt\\Extension\\Bolt\\BoltForms\\Tests\\' => array($vendorDir . '/bolt/boltforms/tests'),
+    'Bolt\\Extension\\Bolt\\BoltForms\\' => array($vendorDir . '/bolt/boltforms', $vendorDir . '/bolt/boltforms/src'),
     'Bolt\\Composer\\' => array($baseDir . '/'),
 );

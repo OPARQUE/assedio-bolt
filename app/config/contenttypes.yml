@@ -383,3 +383,21 @@ config-assedio:
             type: textarea
             group: Página de Contato
     show_on_dashboard: false
+    
+contatos:
+    name: Contatos
+    singular_name: Contato
+    fields:
+        nome:
+            label: Nome
+            type: text
+            class: large
+        slug:
+            type: slug
+            uses: nome
+        email:
+            type: text
+        mensagem:
+            type: textarea
+    searchable: false
+    default_status: publish

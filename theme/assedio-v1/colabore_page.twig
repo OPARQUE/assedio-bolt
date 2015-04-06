@@ -19,15 +19,15 @@
         </div>
         {% setcontent noticias_col = 'noticias/latest/4' where { categorias: 'colaboradores' } %}
         {% for item in noticias_col %}
-            <div class="col-md-2 col-sm-4 col-xs-6 card-noticia-colabore">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 card-noticia-colabore">
                 {% for categoria in item.taxonomy.categorias %}
                     <h5>{{categoria|upper}}</h5>
                 {% endfor %}
-                <h2>
+                <h3>
                     <a href="{{item.link}}">
                         {{item.titulo_destaque|upper}}
                     </a>
-                </h2>
+                </h3>
                 {{item.resumo|excerpt(140)}}
                 <br><a href="{{item.link}}">LEIA +</a>
             </div>

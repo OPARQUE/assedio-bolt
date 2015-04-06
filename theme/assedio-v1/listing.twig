@@ -38,6 +38,10 @@
                         {# taxonomies are fetched unordered by design. If we specified an order in config.yml, sort them here: #}
                         {% set records = records|order(app.config.get('general/listing_sort')) %}
                     {% endif %}
+                    {% if searchresult.no_of_results > 0 %}
+                        <h1 class="text-uppercase">Resultados da busca para "<span class="cor1">{{search}}</span>"</h1>
+                        <hr>
+                    {% endif %}
                 </div>
             </div>
             <div class="row lista-noticias">

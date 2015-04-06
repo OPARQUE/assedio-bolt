@@ -106,5 +106,62 @@
             "source": "https://github.com/jadwigo/SimpleForms/tree/0.12",
             "issues": "https://github.com/jadwigo/SimpleForms/issues"
         }
+    },
+    {
+        "name": "bolt/boltforms",
+        "version": "v2.1.2",
+        "version_normalized": "2.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/GawainLynch/bolt-extension-boltforms.git",
+            "reference": "f234a5be6fb5d1f609429a8971e8424336554b7b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/GawainLynch/bolt-extension-boltforms/zipball/f234a5be6fb5d1f609429a8971e8424336554b7b",
+            "reference": "f234a5be6fb5d1f609429a8971e8424336554b7b",
+            "shasum": ""
+        },
+        "require": {
+            "bolt/bolt": ">=2.1.0,<3.0.0"
+        },
+        "time": "2015-04-02 15:51:52",
+        "type": "bolt-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2.*-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "init.php"
+            ],
+            "psr-4": {
+                "Bolt\\Extension\\Bolt\\BoltForms\\": [
+                    "",
+                    "src/"
+                ],
+                "Bolt\\Extension\\Bolt\\BoltForms\\Tests\\": "tests/",
+                "ReCaptcha\\": "lib/ReCaptcha/"
+            }
+        },
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "Gawain Lynch",
+                "email": "gawain.lynch@gmail.com"
+            }
+        ],
+        "description": "Symfony Forms API for bolt",
+        "keywords": [
+            ""
+        ],
+        "support": {
+            "source": "https://github.com/GawainLynch/bolt-extension-boltforms/tree/v2.1.2",
+            "issues": "https://github.com/GawainLynch/bolt-extension-boltforms/issues"
+        }
     }
 ]
