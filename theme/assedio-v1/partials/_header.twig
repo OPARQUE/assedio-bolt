@@ -18,6 +18,7 @@
         <meta property="article:modified_time" content="{{ record.datechanged }}" />
         <meta property="og:image" content="{% if record.imagem_destaque is not empty %}{{ paths.hosturl ~ image(record.imagem_destaque) }}{% elseif record.imagem is not empty %}{{ paths.hosturl ~ image(record.imagem) }}{% else %}{{ paths.hosturl ~ image(config.logo_site) }}{% endif %}" />
 
+        <link rel="shortcut icon" type="image/png" href="{{image(config.logo_assedio_rodape)}}"/>
         <!-- Bootstrap -->
         <link href="{{ paths.theme }}assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
