@@ -31,6 +31,7 @@ noticias:
             label: Título
             type: text
             class: large
+            group: Geral
         slug:
             type: slug
             uses: titulo
@@ -51,6 +52,14 @@ noticias:
             label: Data do evento (para agenda)
             type: date
             postfix: "<p><em>Só preencha esta informação caso a categoria seja <strong>AGENDA</strong></em></p>"
+        email-gravatar:
+            label: E-mail usado no Gravatar
+            type: text
+            group: Gravatar
+        nome-autor:
+            label: Nome que aparecerá ao lado da imagem do Gravatar
+            type: text
+            group: Gravatar
     taxonomy: [ categorias, tags ]
     relations:
         galerias:
@@ -206,6 +215,7 @@ fotos:
         corpo:
             type: html
             height: 300px
+            postfix: "<p><em>Caso precise inserir uma galeria do Flickr, basta seguir este artigo <strong><a href='http://blog.flickr.net/en/2013/12/18/flickr-web-embeds/' target='_blank'>http://blog.flickr.net/en/2013/12/18/flickr-web-embeds/</a></strong>. Após copiar o código do Embed, clique em 'Fonte' no editor de texto, cole o código Embed, mude o número dentro de width='' para 100%.</em></p>"
     relations:
         galerias:
             multiple: false
@@ -382,7 +392,13 @@ config-assedio:
             label: Corpo da Página de Contato (endereço em três linhas)
             type: textarea
             group: Página de Contato
+        imagem-colabore:
+            label: Imagem no corpo da página Colabore
+            type: image
+            group: Página Colabore
     show_on_dashboard: false
+    searchable: false
+    viewless: true
     
 contatos:
     name: Contatos
@@ -399,5 +415,24 @@ contatos:
             type: text
         mensagem:
             type: textarea
+    searchable: false
+    default_status: publish
+    
+parceiros:
+    name: Parceiros
+    singular_name: Parceiro
+    fields:
+        titulo:
+            label: Título do Parceiro
+            type: text
+            class: large
+            postfix: "<p><em>Este título é apenas para controle interno, e não será exibido no site.</em></p>"
+        slug:
+            type: slug
+            uses: titulo
+        corpo:
+            type: html
+            height: 300px
+            postfix: "<p><em>Neste espaço é possível inserir embeds, imagens e outros conteúdos HTML, mas é preciso tomar cuidado com a formatação, para não quebrar o layout, onde o espaço para exibição do conteúdo é restrito.</em></p>"
     searchable: false
     default_status: publish

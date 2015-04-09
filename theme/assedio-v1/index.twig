@@ -84,7 +84,10 @@
     <div class="row">
         <div class="col-xs-12 bloco-parceiros">
             <h5>PARCEIROS DO <img src="{{paths.theme}}assets/img/icone-logo-preto.png" width="20" style="margin-top: -5px;margin-left: 5px;" /></h5>
-            <img src="{{paths.theme}}assets/img/logo-libre.png" class="img-responsive center-block"/>
+            {% setcontent parceiros = 'parceiros/random/1' %}
+            {% for item in parceiros %}
+                {{item.corpo}}
+            {% endfor %}
         </div>
     </div>
 </div>

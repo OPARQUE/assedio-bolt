@@ -18,11 +18,13 @@
         <div class="col-xs-12 link-branco padding-bottom-1">
             <nav class="navbar-collapse collapse" id="menu-principal">
                 <ul class="">
-                    {% setcontent menu = 'paginas/first/6' %}
+                    {% setcontent menu = 'paginas/first/7' %}
                     {% for item in menu %}
+                        {% if item.slug != 'erro-404' %}
                         <li>
                             <a href="{{item.link}}">{{item.titulo}}</a>
                         </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </nav>

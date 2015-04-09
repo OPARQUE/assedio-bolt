@@ -58,6 +58,17 @@
                         </div>
                     </div>
                     {% include 'partials/_galeria.twig' %}
+                    {% if record.email_gravatar != '' %}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bloco-gravatar">
+                                <hr>
+                                <img src="{{imagegravatar(record.email_gravatar,'120')}}" class="img-circle"/>
+                                <h4>{{record.nome_autor}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="row padding-bottom-2 noticias-relacionadas">

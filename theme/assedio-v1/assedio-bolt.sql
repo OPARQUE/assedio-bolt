@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Abr-2015 às 23:08
+-- Generation Time: 09-Abr-2015 às 16:21
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -20,20 +20,111 @@ SET time_zone = "+00:00";
 -- Database: `assedio-bolt`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_authtoken`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_authtoken` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `token` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `salt` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `lastseen` datetime DEFAULT NULL,
+  `ip` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `useragent` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `validity` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_740AC52FF85E0677` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
 --
 -- Extraindo dados da tabela `bolt_authtoken`
 --
 
 INSERT INTO `bolt_authtoken` (`id`, `username`, `token`, `salt`, `lastseen`, `ip`, `useragent`, `validity`) VALUES
 (1, 'romulo1984', '180ecdcfb651f5af08479f465833e551', 'mAqUZcS1gHAD', '2015-03-19 13:11:10', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', '2015-04-02 13:11:10'),
-(2, 'romulo1984', '88525345f0756e12a5852563e6e431ab', 'lEFxWerJHLe1', '2015-04-06 17:04:26', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36', '2015-04-20 17:04:26');
+(2, 'romulo1984', '88525345f0756e12a5852563e6e431ab', 'lEFxWerJHLe1', '2015-04-06 17:04:26', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36', '2015-04-20 17:04:26'),
+(3, 'romulo1984', 'b1ae9547b44f82f61529d70b6a6f6894', 'yaydRNqGLiUv', '2015-04-09 09:29:36', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36', '2015-04-23 09:29:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_config_assedio`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_config_assedio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `descricao` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `facebook` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `youtube` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `instagram` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `twitter` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `logo_site` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `logo_menu` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `logo_rodape` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `desc_rodape` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `logo_assedio_rodape` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `hashtags` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `mapa` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `telefone` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `logo_site_horizontal` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `imagem_colabore` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_EEE5D076989D9B62` (`slug`),
+  KEY `IDX_EEE5D076AFBA6FD8` (`datecreated`),
+  KEY `IDX_EEE5D076BE74E59A` (`datechanged`),
+  KEY `IDX_EEE5D076A5131421` (`datepublish`),
+  KEY `IDX_EEE5D076B7805520` (`datedepublish`),
+  KEY `IDX_EEE5D0767B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Extraindo dados da tabela `bolt_config_assedio`
 --
 
-INSERT INTO `bolt_config_assedio` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `descricao`, `facebook`, `youtube`, `instagram`, `twitter`, `logo_site`, `logo_menu`, `logo_rodape`, `desc_rodape`, `logo_assedio_rodape`, `hashtags`, `mapa`, `email`, `telefone`, `corpo`, `logo_site_horizontal`) VALUES
-(1, 'geral', '2015-03-24 20:38:00', '2015-04-06 17:20:48', '2015-03-24 20:26:33', NULL, '', 1, 'published', 'Geral', 'O Assédio Coletivo é um grupo formado por cerca de 20 produtores e articuladores culturais, cuja sede está localizada em Itararé, Vitória/ES. O coletivo iniciou suas atividades em janeiro de 2012 e, hoje, desenvolve ações que objetivam fortalecer o cenário cultural do Espírito Santo, principalmente valorizando a arte autoral, o fazer colaborativo e a ação de outros coletivos e agentes culturais.', 'https://www.facebook.com/assediocoletivo', 'https://www.youtube.com/user/assediocoletivo', 'https://instagram.com/assediocoletivo/', 'https://twitter.com/assediocoletivo', '{"file":"2015-03\\/logo.png"}', '{"file":"2015-03\\/logos-sidebar.png"}', '{"file":"2015-03\\/regua-rodape-2.png"}', 'O Assédio Coletivo é uma rede articulada por agentes culturais com o objetivo de fortalecer o cenário cultural da Grande Vitória e do ES.', '{"file":"2015-04\\/icone-logo-preto.png"}', '<h3>#COLABORATIVO<br />\r\n#REDES<br />\r\n#CULTURA</h3>', '{"address":"Avenida Robert Kennedy, 59 - Itarar\\u00e9, Vit\\u00f3ria-ES","latitude":"-20.2954","longitude":"-40.307586","formatted_address":"Rua Daniel Abreu Machado, 131 - Itarar\\u00e9, Vit\\u00f3ria - ES, 29047-540, Brasil"}', 'assediocoletivo@gmail.com.br', '27 3026 1556', 'Avenida Robert Kennedy, nº 59<br>\r\nItararé - Vitória - ES - CEP: 29047-700<br>\r\nPonto de referência: em frente à Padaria Sandra', '{"file":"2015-03\\/logo-horizontal.png"}');
+INSERT INTO `bolt_config_assedio` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `descricao`, `facebook`, `youtube`, `instagram`, `twitter`, `logo_site`, `logo_menu`, `logo_rodape`, `desc_rodape`, `logo_assedio_rodape`, `hashtags`, `mapa`, `email`, `telefone`, `corpo`, `logo_site_horizontal`, `imagem_colabore`) VALUES
+(1, 'geral', '2015-03-24 20:38:00', '2015-04-09 09:50:09', '2015-03-24 20:26:33', NULL, '', 1, 'published', 'Geral', 'O Assédio Coletivo é um grupo formado por cerca de 20 produtores e articuladores culturais, cuja sede está localizada em Itararé, Vitória/ES. O coletivo iniciou suas atividades em janeiro de 2012 e, hoje, desenvolve ações que objetivam fortalecer o cenário cultural do Espírito Santo, principalmente valorizando a arte autoral, o fazer colaborativo e a ação de outros coletivos e agentes culturais.', 'https://www.facebook.com/assediocoletivo', 'https://www.youtube.com/user/assediocoletivo', 'https://instagram.com/assediocoletivo/', 'https://twitter.com/assediocoletivo', '{"file":"2015-03\\/logo.png"}', '{"file":"2015-03\\/logos-sidebar.png"}', '{"file":"2015-03\\/regua-rodape-2.png"}', 'O Assédio Coletivo é uma rede articulada por agentes culturais com o objetivo de fortalecer o cenário cultural da Grande Vitória e do ES.', '{"file":"2015-04\\/icone-logo-preto.png"}', '<h3>#COLABORATIVO<br />\r\n#REDES<br />\r\n#CULTURA</h3>', '{"address":"Avenida Robert Kennedy, 59 - Itarar\\u00e9, Vit\\u00f3ria-ES","latitude":"-20.2954","longitude":"-40.307586","formatted_address":"Rua Daniel Abreu Machado, 131 - Itarar\\u00e9, Vit\\u00f3ria - ES, 29047-540, Brasil"}', 'assediocoletivo@gmail.com.br', '27 3026 1556', 'Avenida Robert Kennedy, nº 59<br>\r\nItararé - Vitória - ES - CEP: 29047-700<br>\r\nPonto de referência: em frente à Padaria Sandra', '{"file":"2015-03\\/logo-horizontal.png"}', '{"file":"2015-04\\/colabore.jpg"}');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_contatos`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_contatos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `nome` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `email` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `mensagem` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D5A7C121989D9B62` (`slug`),
+  KEY `IDX_D5A7C121AFBA6FD8` (`datecreated`),
+  KEY `IDX_D5A7C121BE74E59A` (`datechanged`),
+  KEY `IDX_D5A7C121A5131421` (`datepublish`),
+  KEY `IDX_D5A7C121B7805520` (`datedepublish`),
+  KEY `IDX_D5A7C1217B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `bolt_contatos`
@@ -42,13 +133,84 @@ INSERT INTO `bolt_config_assedio` (`id`, `slug`, `datecreated`, `datechanged`, `
 INSERT INTO `bolt_contatos` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `nome`, `email`, `mensagem`) VALUES
 (4, 'slug-a77poc', '2015-04-06 18:06:58', '2015-04-06 18:06:58', '2015-04-06 18:06:58', NULL, '', NULL, 'publish', 'Marcos Testador da Silva', 'mtestador@silva.com', 'E');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_cron`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_cron` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `interim` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `lastrun` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_CD38E123615F8869` (`interim`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_fotos`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_fotos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_DA5FFB7A989D9B62` (`slug`),
+  KEY `IDX_DA5FFB7AAFBA6FD8` (`datecreated`),
+  KEY `IDX_DA5FFB7ABE74E59A` (`datechanged`),
+  KEY `IDX_DA5FFB7AA5131421` (`datepublish`),
+  KEY `IDX_DA5FFB7AB7805520` (`datedepublish`),
+  KEY `IDX_DA5FFB7A7B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
 --
 -- Extraindo dados da tabela `bolt_fotos`
 --
 
 INSERT INTO `bolt_fotos` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `resumo`, `corpo`) VALUES
 (1, 'este-e-um-item-da-biblioteca-do-tipo-fotos', '2015-04-01 10:17:04', '2015-04-01 10:17:04', '2015-04-01 10:15:46', NULL, '', 1, 'published', 'Este é um item da Biblioteca do tipo Fotos', 'Aqui entra um resumo qualquer', '<p>Aqui pode vir uma descrição qualquer. Como é um item de fotos, então deverá ser escolhida uma Galeria no campo abaixo.</p>'),
-(2, 'outro-item-de-fotos', '2015-04-01 10:17:48', '2015-04-01 10:17:48', '2015-04-01 10:17:06', NULL, '', 1, 'published', 'Outro item de Fotos', 'Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil.', '<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>');
+(2, 'outro-item-de-fotos', '2015-04-01 10:17:48', '2015-04-01 10:17:48', '2015-04-01 10:17:06', NULL, '', 1, 'published', 'Outro item de Fotos', 'Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil.', '<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>'),
+(3, 'galeria-vinda-do-flickr', '2015-04-09 10:16:34', '2015-04-09 10:19:53', '2015-04-09 10:11:52', NULL, '', 1, 'published', 'Galeria vinda do flickr', 'Uma galeria simples com fotos do Flickr', '<p><iframe allowfullscreen="" frameborder="0" height="534" mozallowfullscreen="" msallowfullscreen="" oallowfullscreen="" src="https://www.flickr.com/photos/sharkpix/17079730571/in/explore-2015-04-08/player/" webkitallowfullscreen="" width="100%"></iframe></p>');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_galerias`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_galerias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `imagens` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `colunas` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D94B4E63989D9B62` (`slug`),
+  KEY `IDX_D94B4E63AFBA6FD8` (`datecreated`),
+  KEY `IDX_D94B4E63BE74E59A` (`datechanged`),
+  KEY `IDX_D94B4E63A5131421` (`datepublish`),
+  KEY `IDX_D94B4E63B7805520` (`datedepublish`),
+  KEY `IDX_D94B4E637B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `bolt_galerias`
@@ -57,6 +219,35 @@ INSERT INTO `bolt_fotos` (`id`, `slug`, `datecreated`, `datechanged`, `datepubli
 INSERT INTO `bolt_galerias` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `imagens`, `colunas`) VALUES
 (1, 'galeria-de-testes', '2015-03-18 14:48:21', '2015-03-31 17:05:27', '2015-03-18 14:45:19', NULL, '', 1, 'published', 'Galeria de testes', '[{"filename":"agriculture-cereals-field-621.jpg","title":"agriculture-cereals-field-621.jpg","id":0,"order":1,"file":null},{"filename":"blur-flowers-home-1093.jpg","title":"blur-flowers-home-1093.jpg","id":1,"order":1,"file":null},{"filename":"configure-disc-jockey-disco-1504.jpg","title":"configure-disc-jockey-disco-1504.jpg","id":2,"order":1,"file":null},{"filename":"garden-gardening-grass-589.jpg","title":"garden-gardening-grass-589.jpg","id":3,"order":1,"file":null},{"filename":"bell-bills-cash-register-2738.jpg","title":"bell-bills-cash-register-2738.jpg","id":4,"order":1,"file":null},{"filename":"analog-camera-photography-vintage-1844.jpg","title":"analog-camera-photography-vintage-1844.jpg","id":5,"order":1,"file":null},{"filename":"blur-breakfast-coffee-271.jpg","title":"blur-breakfast-coffee-271.jpg","id":6,"order":1,"file":null}]', '3'),
 (2, 'edicoes-festival-tarde-no-bairro', '2015-03-24 21:41:49', '2015-03-31 17:28:31', '2015-03-24 21:40:10', NULL, '', 1, 'published', 'Edições - Festival Tarde no Bairro', '[{"filename":"2015-03\\/300x420.gif","title":"2015-03\\/300x420.gif","id":0,"order":1,"file":null}]', '6');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_itens_biblioteca`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_itens_biblioteca` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `icone` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `link_biblioteca` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_6D36D031989D9B62` (`slug`),
+  KEY `IDX_6D36D031AFBA6FD8` (`datecreated`),
+  KEY `IDX_6D36D031BE74E59A` (`datechanged`),
+  KEY `IDX_6D36D031A5131421` (`datepublish`),
+  KEY `IDX_6D36D031B7805520` (`datedepublish`),
+  KEY `IDX_6D36D0317B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `bolt_itens_biblioteca`
@@ -69,6 +260,33 @@ INSERT INTO `bolt_itens_biblioteca` (`id`, `slug`, `datecreated`, `datechanged`,
 (4, 'fotos', '2015-03-24 22:05:46', '2015-04-01 09:49:30', '2015-03-24 22:05:05', NULL, '', 1, 'published', 'Fotos', 'Coberturas fotográficas de projetos e ações culturais do Assédio Coletivo e parceiros.', 'fa-camera', 'fotos'),
 (5, 'videos', '2015-03-24 22:06:38', '2015-04-01 09:48:43', '2015-03-24 22:05:48', NULL, '', 1, 'published', 'Vídeos', 'Produções audiovisuais do Assédio Coletivo: documentários, teasers, coberturas de ações culturais e outros conteúdos registrados em vídeo.', 'fa-video-camera', 'videos');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_linkerias`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_linkerias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_1076FBF1989D9B62` (`slug`),
+  KEY `IDX_1076FBF1AFBA6FD8` (`datecreated`),
+  KEY `IDX_1076FBF1BE74E59A` (`datechanged`),
+  KEY `IDX_1076FBF1A5131421` (`datepublish`),
+  KEY `IDX_1076FBF1B7805520` (`datedepublish`),
+  KEY `IDX_1076FBF17B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
 --
 -- Extraindo dados da tabela `bolt_linkerias`
 --
@@ -76,6 +294,54 @@ INSERT INTO `bolt_itens_biblioteca` (`id`, `slug`, `datecreated`, `datechanged`,
 INSERT INTO `bolt_linkerias` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `corpo`) VALUES
 (1, 'este-e-um-item-da-linkeria', '2015-04-01 10:13:51', '2015-04-01 10:13:51', '2015-04-01 10:11:16', NULL, '', 1, 'published', 'Este é um item da Linkeria', '<p>Aqui é listado de forma livre todos os links</p>\r\n\r\n<p><a href="oparque.art.br" target="_blank">Este é um link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Este é outro link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Mais um link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Quantos links quiser</a></p>'),
 (2, 'mais-outro-item-do-tipo-de-biblioteca-linkeria', '2015-04-01 10:15:28', '2015-04-01 10:15:28', '2015-04-01 10:13:53', NULL, '', 1, 'published', 'Mais outro item do tipo de biblioteca Linkeria', '<p>Aqui, novamente, são listados os links de forma livre.</p>\r\n\r\n<p><a href="http://oparque.art.br">Primeiro Link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Segundo Link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Terceiro Link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Quarto Link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Quinto Link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Sexto Link</a></p>\r\n\r\n<p><a href="http://oparque.art.br">Sétimo Link</a></p>');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_log_change`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_log_change` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `ownerid` int(11) DEFAULT NULL,
+  `title` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `contenttype` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `contentid` int(11) NOT NULL,
+  `mutation_type` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `diff` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `comment` varchar(150) COLLATE utf8_unicode_ci DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_946F972AA9E377A` (`date`),
+  KEY `IDX_946F97275DAD987` (`ownerid`),
+  KEY `IDX_946F972745E1826` (`contenttype`),
+  KEY `IDX_946F972E625AE99` (`contentid`),
+  KEY `IDX_946F972B0AEEF39` (`mutation_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_log_system`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_log_system` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `level` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `message` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
+  `ownerid` int(11) DEFAULT NULL,
+  `requesturi` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `route` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `ip` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `context` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `source` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_805C16D99AEACC13` (`level`),
+  KEY `IDX_805C16D9AA9E377A` (`date`),
+  KEY `IDX_805C16D975DAD987` (`ownerid`),
+  KEY `IDX_805C16D9E25D857E` (`context`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=489 ;
 
 --
 -- Extraindo dados da tabela `bolt_log_system`
@@ -555,7 +821,51 @@ INSERT INTO `bolt_log_system` (`id`, `level`, `date`, `message`, `ownerid`, `req
 (469, 200, '2015-04-06 17:41:11', 'Sent Bolt Forms notification to Assédio Coletivo <romuloguimaraes@oparque.art.br>', 1, '/assedio-bolt/pagina/contato', 'contentlink', '127.0.0.1', 'extensions', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\extensions\\\\vendor\\\\bolt\\\\boltforms\\\\src\\\\Email.php","Line":198}'),
 (470, 200, '2015-04-06 17:46:22', 'Failed Bolt Forms notification to Assédio Coletivo <romuloguimaraes@oparque.art.br>', 1, '/assedio-bolt/pagina/contato', 'contentlink', '127.0.0.1', 'extensions', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\extensions\\\\vendor\\\\bolt\\\\boltforms\\\\src\\\\Email.php","Line":200}'),
 (471, 200, '2015-04-06 18:06:59', 'Failed Bolt Forms notification to Assédio Coletivo <no-reply@assedicoletivo.com.br>', 1, '/assedio-bolt/pagina/contato', 'contentlink', '127.0.0.1', 'extensions', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\extensions\\\\vendor\\\\bolt\\\\boltforms\\\\src\\\\Email.php","Line":200}'),
-(472, 200, '2015-04-06 17:20:49', 'Saved: Geral', 1, '/assedio-bolt/admin/editcontent/config-assedio/1?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}');
+(472, 200, '2015-04-06 17:20:49', 'Saved: Geral', 1, '/assedio-bolt/admin/editcontent/config-assedio/1?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(473, 200, '2015-04-09 09:17:53', 'Failed login attempt for ''Rômulo Guimarães''.', 0, '/assedio-bolt/admin/login', 'postLogin', '127.0.0.1', 'authentication', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Users.php","Line":476}'),
+(474, 500, '2015-04-09 09:27:17', 'Page configuracao/geral not found.', 0, '/assedio-bolt/configuracao/geral', 'contentlink', '127.0.0.1', 'exception', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Application.php","Line":533}'),
+(475, 200, '2015-04-09 09:29:36', 'Logged in: romulo1984', 1, '/assedio-bolt/admin/login', 'postLogin', '127.0.0.1', 'authentication', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Login.php","Line":52}'),
+(476, 200, '2015-04-09 09:29:40', 'Fetching from remote server: http://news.bolt.cm/', 1, '/assedio-bolt/async/dashboardnews', 'dashboardnews', '127.0.0.1', 'news', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Async.php","Line":114}'),
+(477, 200, '2015-04-09 09:32:50', 'Created: 404 - Nada foi encontrado', 1, '/assedio-bolt/admin/editcontent/paginas?returnto=new', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":783}'),
+(478, 200, '2015-04-09 09:34:38', 'Using cached data', 1, '/assedio-bolt/async/dashboardnews', 'dashboardnews', '127.0.0.1', 'news', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Async.php","Line":169}'),
+(479, 200, '2015-04-09 09:50:09', 'Saved: Geral', 1, '/assedio-bolt/admin/editcontent/config-assedio/1?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(480, 200, '2015-04-09 09:57:51', 'Created: Libre', 1, '/assedio-bolt/admin/editcontent/parceiros?returnto=new', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":783}'),
+(481, 200, '2015-04-09 10:00:47', 'Saved: Libre', 1, '/assedio-bolt/admin/editcontent/parceiros/1?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(482, 200, '2015-04-09 10:03:18', 'Created: Outro parceiro, apenas para testes', 1, '/assedio-bolt/admin/editcontent/parceiros?returnto=new', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":783}'),
+(483, 200, '2015-04-09 10:16:34', 'Created: Galeria vinda do flickr', 1, '/assedio-bolt/admin/editcontent/fotos?returnto=new', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":783}'),
+(484, 200, '2015-04-09 10:16:48', 'Saved: Galeria vinda do flickr', 1, '/assedio-bolt/admin/editcontent/fotos/3?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(485, 200, '2015-04-09 10:17:19', 'Saved: Galeria vinda do flickr', 1, '/assedio-bolt/admin/editcontent/fotos/3?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(486, 200, '2015-04-09 10:18:33', 'Saved: Galeria vinda do flickr', 1, '/assedio-bolt/admin/editcontent/fotos/3?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(487, 200, '2015-04-09 10:19:53', 'Saved: Galeria vinda do flickr', 1, '/assedio-bolt/admin/editcontent/fotos/3?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}'),
+(488, 200, '2015-04-09 10:30:44', 'Saved: Título de uma notícia qualquer', 1, '/assedio-bolt/admin/editcontent/noticias/1?returnto=ajax', 'editcontent', '127.0.0.1', 'content', '{"File":"C:\\\\wamp\\\\www\\\\assedio-bolt\\\\src\\\\Controllers\\\\Backend.php","Line":786}');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_membros`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_membros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `imagem` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `hashtags` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_A8CB1523989D9B62` (`slug`),
+  KEY `IDX_A8CB1523AFBA6FD8` (`datecreated`),
+  KEY `IDX_A8CB1523BE74E59A` (`datechanged`),
+  KEY `IDX_A8CB1523A5131421` (`datepublish`),
+  KEY `IDX_A8CB1523B7805520` (`datedepublish`),
+  KEY `IDX_A8CB15237B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 --
 -- Extraindo dados da tabela `bolt_membros`
@@ -580,20 +890,82 @@ INSERT INTO `bolt_membros` (`id`, `slug`, `datecreated`, `datechanged`, `datepub
 (16, 'thais-carletti', '2015-03-30 16:40:13', '2015-03-30 16:40:13', '2015-03-30 16:39:50', NULL, '', 1, 'published', 'Thais Carletti', '{"file":"2015-03\\/16.png"}', '#fotografia #useflores #feminista'),
 (17, 'thais-gobbo', '2015-03-30 16:40:33', '2015-03-30 16:40:33', '2015-03-30 16:40:14', NULL, '', 1, 'published', 'Thais Gobbo', '{"file":"2015-03\\/17.png"}', '#fotografia #territóriodobem #espetinhodecamarão');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_noticias`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_noticias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `titulo_destaque` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `imagem_destaque` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `data` date DEFAULT NULL,
+  `email_gravatar` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `nome_autor` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_54EB7318989D9B62` (`slug`),
+  KEY `IDX_54EB7318AFBA6FD8` (`datecreated`),
+  KEY `IDX_54EB7318BE74E59A` (`datechanged`),
+  KEY `IDX_54EB7318A5131421` (`datepublish`),
+  KEY `IDX_54EB7318B7805520` (`datedepublish`),
+  KEY `IDX_54EB73187B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
 --
 -- Extraindo dados da tabela `bolt_noticias`
 --
 
-INSERT INTO `bolt_noticias` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `titulo_destaque`, `imagem_destaque`, `resumo`, `corpo`, `data`) VALUES
-(1, 'titulo-de-uma-noticia-qualquer', '2015-03-24 20:54:17', '2015-03-31 16:55:51', '2015-03-24 20:48:24', NULL, '', 1, 'published', 'Título de uma notícia qualquer', 'Título de uma notícia qualquer, mas aqui só vai pro destaque', '{"file":"2015-03\\/post-1.jpg"}', 'A respeito de favela somos tentados a caminhar pelas esquinas do obvio. Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.', '<p>A respeito de favela somos tentados a caminhar pelas esquinas do obvio. Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>\r\n\r\n<p>Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>\r\n\r\n<p>A respeito de favela somos tentados a caminhar pelas esquinas do obvio. Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente!</p>\r\n\r\n<p>Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>\r\n\r\n<p>Ela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>', NULL),
-(2, 'outro-artigo-agora-da-categoria-noticias-especiais', '2015-03-24 20:58:26', '2015-03-24 20:58:36', '2015-03-24 20:55:54', NULL, '', 1, 'published', 'Outro Artigo, agora da categoria Notícias Especiais', 'Outro Artigo, agora da categoria Notícias Especiais, mas com título destaque', '{"file":"2015-03\\/post-3.jpg"}', 'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL),
-(3, 'este-e-um-item-de-agenda', '2015-03-24 21:03:14', '2015-03-30 15:17:40', '2015-03-24 20:58:55', NULL, '', 1, 'published', 'Este é um item de agenda', 'Este título é que é listado', '', 'Este é um item de agenda. Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet.', '<p>Este é um item de agenda.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat</p>\r\n\r\n<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>', '2015-03-10'),
-(4, 'outro-item-de-agenda', '2015-03-24 21:04:12', '2015-03-30 15:18:01', '2015-03-24 21:03:30', NULL, '', 1, 'published', 'Outro item de agenda', 'Outro item de agenda', '', 'Outro item de agenda', '<p>Outro item de agenda</p>', '2015-04-02'),
-(5, 'artigo-da-categoria-noticias-especiais', '2015-03-30 17:19:58', '2015-03-30 17:19:58', '2015-03-30 17:18:36', NULL, '', 1, 'published', 'Artigo da categoria Notícias Especiais', 'Artigo da categoria Notícias Especiais, mas com título destaque', '{"file":"2015-03\\/post-4.jpg"}', 'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL),
-(6, 'uma-noticia-da-categoria-noticia', '2015-03-30 17:23:27', '2015-03-31 15:47:34', '2015-03-30 17:20:46', NULL, '', 1, 'published', 'Uma notícia, da categoria notícia', 'Uma notícia, da categoria notícia, título destaque', '{"file":"alarm-clock-gold-hands-of-a-clock-1778.jpg"}', 'Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL),
-(7, 'esta-agenda-tem-o-dia-de-hoje', '2015-03-30 15:19:38', '2015-03-30 15:19:38', '2015-03-30 15:18:16', NULL, '', 1, 'published', 'Esta agenda tem o dia de hoje', 'Esta agenda tem o dia de hoje, e este é um título destaque', '', 'Apenas um teste para um item da agenda', '<p>Apenas um teste para um item da agenda, que tem a data de hoje (referente ao dia que foi cadastrada e realizada o teste)</p>', '2015-03-30'),
-(8, 'esta-e-uma-noticia-da-categoria-colaboradores', '2015-03-30 16:59:36', '2015-03-30 16:59:36', '2015-03-30 16:58:04', NULL, '', 1, 'published', 'Esta é uma notícia da categoria Colaboradores', 'Esta é uma notícia da categoria Colaboradores, com título destaque', '{"file":"building-frame-garage-1599.jpg"}', 'Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.', '<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL),
-(9, 'outra-noticia-de-colaboradores', '2015-03-30 17:01:47', '2015-03-30 17:01:47', '2015-03-30 16:59:41', NULL, '', 1, 'published', 'Outra notícia de colaboradores', 'Outra notícia de colaboradores, com título destaque', '{"file":"architecture-books-building-2757.jpg"}', 'Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL);
+INSERT INTO `bolt_noticias` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `titulo_destaque`, `imagem_destaque`, `resumo`, `corpo`, `data`, `email_gravatar`, `nome_autor`) VALUES
+(1, 'titulo-de-uma-noticia-qualquer', '2015-03-24 20:54:17', '2015-04-09 10:30:44', '2015-03-24 20:48:24', NULL, '', 1, 'published', 'Título de uma notícia qualquer', 'Título de uma notícia qualquer, mas aqui só vai pro destaque', '{"file":"2015-03\\/post-1.jpg"}', 'A respeito de favela somos tentados a caminhar pelas esquinas do obvio. Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.', '<p>A respeito de favela somos tentados a caminhar pelas esquinas do obvio. Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>\r\n\r\n<p>Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>\r\n\r\n<p>A respeito de favela somos tentados a caminhar pelas esquinas do obvio. Favela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente!</p>\r\n\r\n<p>Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>\r\n\r\n<p>Ela tem “pobre”, tem “funkeiro” e drogado. Favela tem tristeza, tem beco e bala perdida. Mas, às vezes, esquecemos que lá tem gente! - “Vamos construir prédios de luxo no lugar dos casebres! Não faz falta, três ou quatro sobrados na entrada da comunidade”- Isso também é política, meu caro.</p>', NULL, 'romulo1984@gmail.com', 'Rômulo Guimarães'),
+(2, 'outro-artigo-agora-da-categoria-noticias-especiais', '2015-03-24 20:58:26', '2015-03-24 20:58:36', '2015-03-24 20:55:54', NULL, '', 1, 'published', 'Outro Artigo, agora da categoria Notícias Especiais', 'Outro Artigo, agora da categoria Notícias Especiais, mas com título destaque', '{"file":"2015-03\\/post-3.jpg"}', 'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL, '', ''),
+(3, 'este-e-um-item-de-agenda', '2015-03-24 21:03:14', '2015-03-30 15:17:40', '2015-03-24 20:58:55', NULL, '', 1, 'published', 'Este é um item de agenda', 'Este título é que é listado', '', 'Este é um item de agenda. Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet.', '<p>Este é um item de agenda.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat</p>\r\n\r\n<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>', '2015-03-10', '', ''),
+(4, 'outro-item-de-agenda', '2015-03-24 21:04:12', '2015-03-30 15:18:01', '2015-03-24 21:03:30', NULL, '', 1, 'published', 'Outro item de agenda', 'Outro item de agenda', '', 'Outro item de agenda', '<p>Outro item de agenda</p>', '2015-04-02', '', ''),
+(5, 'artigo-da-categoria-noticias-especiais', '2015-03-30 17:19:58', '2015-03-30 17:19:58', '2015-03-30 17:18:36', NULL, '', 1, 'published', 'Artigo da categoria Notícias Especiais', 'Artigo da categoria Notícias Especiais, mas com título destaque', '{"file":"2015-03\\/post-4.jpg"}', 'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL, '', ''),
+(6, 'uma-noticia-da-categoria-noticia', '2015-03-30 17:23:27', '2015-03-31 15:47:34', '2015-03-30 17:20:46', NULL, '', 1, 'published', 'Uma notícia, da categoria notícia', 'Uma notícia, da categoria notícia, título destaque', '{"file":"alarm-clock-gold-hands-of-a-clock-1778.jpg"}', 'Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL, '', ''),
+(7, 'esta-agenda-tem-o-dia-de-hoje', '2015-03-30 15:19:38', '2015-03-30 15:19:38', '2015-03-30 15:18:16', NULL, '', 1, 'published', 'Esta agenda tem o dia de hoje', 'Esta agenda tem o dia de hoje, e este é um título destaque', '', 'Apenas um teste para um item da agenda', '<p>Apenas um teste para um item da agenda, que tem a data de hoje (referente ao dia que foi cadastrada e realizada o teste)</p>', '2015-03-30', '', ''),
+(8, 'esta-e-uma-noticia-da-categoria-colaboradores', '2015-03-30 16:59:36', '2015-03-30 16:59:36', '2015-03-30 16:58:04', NULL, '', 1, 'published', 'Esta é uma notícia da categoria Colaboradores', 'Esta é uma notícia da categoria Colaboradores, com título destaque', '{"file":"building-frame-garage-1599.jpg"}', 'Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.', '<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL, '', ''),
+(9, 'outra-noticia-de-colaboradores', '2015-03-30 17:01:47', '2015-03-30 17:01:47', '2015-03-30 16:59:41', NULL, '', 1, 'published', 'Outra notícia de colaboradores', 'Outra notícia de colaboradores, com título destaque', '{"file":"architecture-books-building-2757.jpg"}', 'Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>\r\n\r\n<p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>\r\n\r\n<p>Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>', NULL, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_outros_conteudos`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_outros_conteudos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `arquivo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_C0FBA077989D9B62` (`slug`),
+  KEY `IDX_C0FBA077AFBA6FD8` (`datecreated`),
+  KEY `IDX_C0FBA077BE74E59A` (`datechanged`),
+  KEY `IDX_C0FBA077A5131421` (`datepublish`),
+  KEY `IDX_C0FBA077B7805520` (`datedepublish`),
+  KEY `IDX_C0FBA0777B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `bolt_outros_conteudos`
@@ -602,6 +974,36 @@ INSERT INTO `bolt_noticias` (`id`, `slug`, `datecreated`, `datechanged`, `datepu
 INSERT INTO `bolt_outros_conteudos` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `resumo`, `corpo`, `arquivo`) VALUES
 (1, 'exemplo-de-outros-conteudos-da-biblioteca', '2015-04-01 10:10:35', '2015-04-01 10:10:35', '2015-04-01 10:08:46', NULL, '', 1, 'published', 'Exemplo de Outros Conteúdos da Biblioteca', 'Aqui é o resumo', '<p>Aqui é o corpo de exemplo de um item de Outros Conteúdos da Biblioteca</p>', '2015-04/exemplo-de-arquivo-para-ser-baixado.txt'),
 (2, 'outro-item-do-tipo-outros-conteudos', '2015-04-01 10:11:07', '2015-04-01 10:11:07', '2015-04-01 10:10:37', NULL, '', 1, 'published', 'Outro item do tipo Outros Conteúdos', 'Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis.', '<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>', '2015-04/exemplo-de-arquivo-para-ser-baixado.txt');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_paginas`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_paginas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `imagem_destaque` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `template` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_235D4201989D9B62` (`slug`),
+  KEY `IDX_235D4201AFBA6FD8` (`datecreated`),
+  KEY `IDX_235D4201BE74E59A` (`datechanged`),
+  KEY `IDX_235D4201A5131421` (`datepublish`),
+  KEY `IDX_235D4201B7805520` (`datedepublish`),
+  KEY `IDX_235D42017B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Extraindo dados da tabela `bolt_paginas`
@@ -613,7 +1015,75 @@ INSERT INTO `bolt_paginas` (`id`, `slug`, `datecreated`, `datechanged`, `datepub
 (3, 'projetos', '2015-03-19 15:08:44', '2015-03-31 17:23:39', '2015-03-19 15:07:29', NULL, '', 1, 'published', 'Nossos Projetos', '', 'As propostas de ações, projetos e intervenções do Assédio Coletivo são articuladas a partir de diálogos com outros agentes culturais e a partir do reconhecimento de situações e realidades.', '<h2>NOSSOS PROJETOS</h2>\r\n\r\n<p>As propostas de ações, projetos e intervenções do Assédio Coletivo são articuladas a partir de diálogos com outros agentes culturais e a partir do reconhecimento de situações e realidades. Entendemos que o envolvimento social e cultural é construído a partir de vivências. Nesse sentido, para estabelecer contatos, acionar e fazer parte de redes e gerir nossos projetos, a comunicação é nossa ferramenta fundamental.</p>', 'projetos_page.twig'),
 (4, 'biblioteca', '2015-03-19 15:09:57', '2015-04-01 11:10:52', '2015-03-19 15:09:00', NULL, '', 1, 'published', 'Biblioteca', '', 'Aqui você vai encontrar conteúdos produzidos pelo nosso coletivo. Projetos inscritos e aprovados em editais, fotos e vídeos, links externos de referências, cartilhas formativas, coletâneas musicais, anuários, zines e muito mais para download.', '<p>Aqui você vai encontrar conteúdos produzidos pelo nosso coletivo. Projetos inscritos e aprovados em editais, fotos e vídeos, links externos de referências, cartilhas formativas, coletâneas musicais, anuários, zines e muito mais para download.</p>', 'biblioteca_page.twig'),
 (5, 'contato', '2015-03-24 20:44:33', '2015-03-30 17:10:22', '2015-03-24 20:43:11', NULL, '', 1, 'published', 'Contato', '{"file":"2015-03\\/logo-pb-libre.png"}', 'A Libre - Casa Coletiva é um espaço cultural autônomo aberto a atividades colaborativas. A casa está localizada em Vitória - Espírito Santo, no bairro Itararé. A Libre recebe vivências coletivas, oficinas, eventos, exposições, exibições cineclubistas e formações - é um espaço aberto para grupos e instituições parceiras desenvolverem suas atividades.', '<h3>A LIBRE CASA COLETIVA</h3>\r\n\r\n<p>A Libre - Casa Coletiva é um espaço cultural autônomo aberto a atividades colaborativas. A casa está localizada em Vitória - Espírito Santo, no bairro Itararé. A Libre recebe vivências coletivas, oficinas, eventos, exposições, exibições cineclubistas e formações - é um espaço aberto para grupos e instituições parceiras desenvolverem suas atividades.</p>\r\n\r\n<p>Atualmente quem faz a gestão da Libre é o Assédio Coletivo - embora a casa já exista como projeto desde 2013 em parceria com outras iniciativas coletivas como Coletivo Femenina, Voadora Records e Organização dos Cineclubes Capixabas (OCCa). Em paralelo a ações de ocupação de espaço público, valorização da arte autoral e luta por políticas públicas, o Assédio Coletivo vê na Libre um espaço propício para realizar novas conexões e vivências.</p>', 'contato_page.twig'),
-(6, 'colabore', '2015-03-24 20:47:38', '2015-03-30 16:56:35', '2015-03-24 20:45:29', NULL, '', 1, 'published', 'Colabore', '{"file":"2015-03\\/slide-2.jpg"}', 'O Site do Assédio Coletivo é uma plataforma construída de forma colaborativa. Caso tenha interesse em colaborar com nossa produção de matérias e textos críticos a respeito de temáticas culturais, sociais ou artísticas, entre em contato com nossa equipe e faça sua proposta! Nossa equipe retornará o mais breve possível para dialogar a respeito de sua contribuição.', '<p>O Site do Assédio Coletivo é uma plataforma construída de forma colaborativa. Caso tenha interesse em colaborar com nossa produção de matérias e textos críticos a respeito de temáticas culturais, sociais ou artísticas, entre em contato com nossa equipe e faça sua proposta! Nossa equipe retornará o mais breve possível para dialogar a respeito de sua contribuição.</p>\r\n\r\n<p></p>\r\n\r\n<h2>ENTRE EM CONTATO!</h2>\r\n\r\n<p>assediocoletivo@gmail.com.br</p>', 'colabore_page.twig');
+(6, 'colabore', '2015-03-24 20:47:38', '2015-03-30 16:56:35', '2015-03-24 20:45:29', NULL, '', 1, 'published', 'Colabore', '{"file":"2015-03\\/slide-2.jpg"}', 'O Site do Assédio Coletivo é uma plataforma construída de forma colaborativa. Caso tenha interesse em colaborar com nossa produção de matérias e textos críticos a respeito de temáticas culturais, sociais ou artísticas, entre em contato com nossa equipe e faça sua proposta! Nossa equipe retornará o mais breve possível para dialogar a respeito de sua contribuição.', '<p>O Site do Assédio Coletivo é uma plataforma construída de forma colaborativa. Caso tenha interesse em colaborar com nossa produção de matérias e textos críticos a respeito de temáticas culturais, sociais ou artísticas, entre em contato com nossa equipe e faça sua proposta! Nossa equipe retornará o mais breve possível para dialogar a respeito de sua contribuição.</p>\r\n\r\n<p></p>\r\n\r\n<h2>ENTRE EM CONTATO!</h2>\r\n\r\n<p>assediocoletivo@gmail.com.br</p>', 'colabore_page.twig'),
+(7, 'erro-404', '2015-04-09 09:32:50', '2015-04-09 09:32:50', '2015-04-09 09:30:40', NULL, '', 1, 'published', '404 - Nada foi encontrado', '', 'Esta página não existe, foi movida ou está temporariamente indisponível.', '<h3>Esta página não existe, foi movida ou está temporariamente indisponível.</h3>\r\n\r\n<h3>Navegue pelo nosso menu ou faça uma busca para encontrar o que procura.</h3>', '404.twig');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_parceiros`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_parceiros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_CCA29477989D9B62` (`slug`),
+  KEY `IDX_CCA29477AFBA6FD8` (`datecreated`),
+  KEY `IDX_CCA29477BE74E59A` (`datechanged`),
+  KEY `IDX_CCA29477A5131421` (`datepublish`),
+  KEY `IDX_CCA29477B7805520` (`datedepublish`),
+  KEY `IDX_CCA294777B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `bolt_parceiros`
+--
+
+INSERT INTO `bolt_parceiros` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `corpo`) VALUES
+(1, 'libre', '2015-04-09 09:57:50', '2015-04-09 10:00:47', '2015-04-09 09:56:28', NULL, '', 1, 'published', 'Libre', '<p><a href="http://www.assediocoletivo.com.br"><img alt="" class="center-block" src="/assedio-bolt/files/2015-04/logo-libre.png" style="width: 160px; height: 160px; text-align: center;" /></a></p>'),
+(2, 'outro-parceiro-apenas-para-testes', '2015-04-09 10:03:17', '2015-04-09 10:03:17', '2015-04-09 10:01:53', NULL, '', 1, 'published', 'Outro parceiro, apenas para testes', '<div class="embeddedContent oembed-provider- oembed-provider-youtube" data-align="center" data-maxheight="480" data-maxwidth="364" data-oembed="https://www.youtube.com/watch?v=eCUIol0vCdg" data-oembed_provider="youtube" data-resizetype="responsive" style="text-align: center;"><iframe allowfullscreen="true" allowscriptaccess="always" frameborder="0" height="298.9082352941176" scrolling="no" src="//www.youtube.com/embed/eCUIol0vCdg?wmode=transparent&amp;jqoemcache=o97me" width="364"></iframe></div>\r\n\r\n<p></p>');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_projetos`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_projetos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `titulo_destaque` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `imagem_destaque` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `logo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `cor_titulo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_BA7467F6989D9B62` (`slug`),
+  KEY `IDX_BA7467F6AFBA6FD8` (`datecreated`),
+  KEY `IDX_BA7467F6BE74E59A` (`datechanged`),
+  KEY `IDX_BA7467F6A5131421` (`datepublish`),
+  KEY `IDX_BA7467F6B7805520` (`datedepublish`),
+  KEY `IDX_BA7467F67B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `bolt_projetos`
@@ -627,6 +1097,35 @@ INSERT INTO `bolt_projetos` (`id`, `slug`, `datecreated`, `datechanged`, `datepu
 (5, 'reviravolta-coletiva', '2015-03-24 21:57:26', '2015-04-02 11:58:12', '2015-03-24 21:54:34', NULL, '', 1, 'published', 'Reviravolta Coletiva', 'Reviravolta Coletiva', '{"file":"2015-03\\/bg-reviravolta.jpg"}', '{"file":"2015-03\\/logo-reviravolta.png"}', '#EC7E8B', 'A Reviravolta Coletiva é uma agenda integrada de ações culturais articulada pelo Assédio Coletivo que possui edições anuais e objetiva dialogar com coletivos e agentes culturais que trabalham com arte e cultura no Espírito Santo.', '<p>A Reviravolta Coletiva é uma agenda integrada de ações culturais articulada pelo Assédio Coletivo que possui edições anuais e objetiva dialogar com coletivos e agentes culturais que trabalham com arte e cultura no Espírito Santo. A partir de reuniões, a programação é montada coletivamente e incluiu atividades de formação, produção e difusão cultural. O evento é articulado uma vez por ano e mobiliza agentes culturais em torno de uma possibilidade comum para compartilhar suas experiências, discutir sobre suas produções, trocar tecnologias de produção e debater a respeito da construção social, econômica, cultural e política da sociedade na qual estamos inseridos. A construção colaborativa é fundamental para a Reviravolta Coletiva. Para definir a agenda integrada são feitas pelo menos três reuniões presenciais e acompanhamento online.</p>\r\n\r\n<p>Em agosto de 2012, aconteceu a #1 Reviravolta Coletiva, com o mote “Mapeamento e Reconhecimento”. A programação incluiu atividades de formação, produção e difusão cultural. O processo de construção da Reviravolta Coletiva em 2012 aconteceu de forma colaborativa com outros grupos da cidade de Vitória no mesmo mês de sua produção. Houve listagem de materiais, organização de locais e divulgação. De acordo com o mapeamento feito ao longo do processo, foram 37 ações integradas e 60 coletivos/grupos envolvidos com a #1 Reviravolta Coletiva.</p>\r\n\r\n<p>Na segunda edição, o tema escolhido foi “Integração e Locomoção”. Diversos grupos atuantes nas cidades de Vitória, Vila Velha e Cariacica fizeram suas propostas fazendo com que a #2 Reviravolta Coletiva percorresse três cidades da Grande Vitória. A agenda foi de 13 a 27 de outubro de 2013, e contou com uma divisão na programação - uma primeira semana de formação com oficinas e mesas de debates e uma segunda semana de intervenções nas cidades. Ao todo, a agenda contou com 34 atividades integradas e 23 coletivos envolvidos diretamente na produção da #2 Reviravolta Coletiva.</p>\r\n\r\n<p>A #3 Reviravolta Coletiva, por sua vez, teve como tema "O Ser Coletivo". A agenda foi de 09 a 23 de novembro de 2014, contando com 38 atividades em seis cidades da Grande Vitória - Vitória, Vila Velha, Cariacica, Serra, Viana e Guarapari. As ações envolveram linguagens diversas (artes plásticas e visuais, música, literatura, teatro, dança etc) e tiveram foco em propostas de formação, produção e difusão cultural direcionadas para a discussão a respeito do indivíduo contemporâneo e de sua atuação no campo cultural, social e político. A primeira semana concentrou oficinas e rodas de conversa com um diferencial: a estrutura de desconferências. Esta estrutura de diálogo possibilitou maior horizontalidade nas contribuições sobre os temas juventude, cultura, mulher e corpo, comunicação independente, movimento negro e direito à cidade.</p>\r\n\r\n<p>Estar junto é o objetivo principal da Reviravolta Coletiva. A partir das vivências e atividades, pretende-se discutir sobre a relação dos artistas e produtores culturais entre si e com a cidade, suas contribuições com os coletivos dos quais fazem parte e, de que forma seus trabalhos com arte e cultura contribuem para a transformação social. Tudo isso parte da compreensão de que fazemos parte de uma realidade socialmente compartilhada e de que as ações individuais influenciam e</p>\r\n\r\n<h2>\r\n  O QUE É A REVIRAVOLTA COLETIVA?\r\n</h2>\r\n</h2>\r\n<p><iframe allowfullscreen="" frameborder="0" height="400" src="https://www.youtube.com/embed/CrV_JeRwFMM" width="100%"></iframe></p>\r\n<h2>\r\n  REVIRADOC\r\n</h2>\r\n<p><iframe width="100%" height="400" src="https://www.youtube.com/embed/CrV_JeRwFMM" frameborder="0" allowfullscreen></iframe></p>'),
 (6, 'site-assedio-coletivo', '2015-03-24 22:00:34', '2015-03-24 22:00:34', '2015-03-24 21:57:38', NULL, '', 1, 'published', 'Site Assédio Coletivo', 'Site Assédio Coletivo', '{"file":"2015-03\\/bg-site.jpg"}', '', '#ffffff', 'Nosso site é uma plataforma online que busca expandir a área de atuação do Assédio Coletivo e das redes de agentes culturais das quais fazemos parte.', '<p>Nosso site é uma plataforma online que busca expandir a área de atuação do Assédio Coletivo e das redes de agentes culturais das quais fazemos parte. Esta plataforma ampara nossas práticas cotidianas enquanto coletivo e contribui para a difusão de conteúdos pertinentes à produção e articulação cultural, social e artística.</p>\r\n\r\n<p>A gestão dos conteúdos do nosso site se pauta por meio das atividades do Assédio Coletivo, de articulações e propostas de agentes culturais e coletivos parceiros. Integrando outros produtores e articuladores culturais, o objetivo do site é contribuir com projetos e iniciativas colaborativas por meio de produção de conteúdo audiovisual, recepção de textos escritos por artistas, produtores, agentes culturais e demais interessados.</p>\r\n\r\n<p>Além de auxiliar a articulação de redes de produções, o site também disponibiliza para consulta e download todos os projetos desenvolvidos pelo Assédio Coletivo - propostas encaminhadas a editais e prêmios, coletâneas musicais, apostilas formativas, metodologias de ações, bem como seus formatos e suas estruturas básicas. Acredita-se que a exposição destes conteúdos fomenta atitudes de outras iniciativas - o compartilhamento, a apropriação, o diálogo e a ressignificação desses formatos é parte da missão assumida por esse site e pelo Assédio Coletivo. Incentivamos a troca de informações livres em todas as fases dos processos de criação e desenvolvimento de projetos e ações culturais e sociais.</p>');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_projetos_aprovados`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_projetos_aprovados` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `arquivo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_D678E365989D9B62` (`slug`),
+  KEY `IDX_D678E365AFBA6FD8` (`datecreated`),
+  KEY `IDX_D678E365BE74E59A` (`datechanged`),
+  KEY `IDX_D678E365A5131421` (`datepublish`),
+  KEY `IDX_D678E365B7805520` (`datedepublish`),
+  KEY `IDX_D678E3657B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
 --
 -- Extraindo dados da tabela `bolt_projetos_aprovados`
 --
@@ -634,6 +1133,25 @@ INSERT INTO `bolt_projetos` (`id`, `slug`, `datecreated`, `datechanged`, `datepu
 INSERT INTO `bolt_projetos_aprovados` (`id`, `slug`, `datecreated`, `datechanged`, `datepublish`, `datedepublish`, `username`, `ownerid`, `status`, `titulo`, `resumo`, `corpo`, `arquivo`) VALUES
 (1, 'aqui-e-o-titulo-do-projeto-aprovado', '2015-04-01 10:07:29', '2015-04-01 10:07:29', '2015-04-01 10:05:04', NULL, '', 1, 'published', 'Aqui é o título do projeto aprovado', 'Aqui vem o resumo do projeto aprovado', '<p>Aqui entra o texto resumido do projeto. É recomendável que não seja muito extenso, visto que será exibido uma quantidade limitada de caracteres.</p>', '2015-04/exemplo-de-arquivo-para-ser-baixado.txt'),
 (2, 'outro-item-de-projetos-aprovados', '2015-04-01 10:08:36', '2015-04-01 10:08:36', '2015-04-01 10:07:30', NULL, '', 1, 'published', 'Outro item de Projetos Aprovados', 'Mais um resumo, que será usado apenas para SEO', '<p>Aqui é o corpo do conteúdo, como todos os outros.</p>', '2015-04/slide-1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_relations`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_relations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_contenttype` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `from_id` int(11) NOT NULL,
+  `to_contenttype` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `to_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_4C524BC3EA112943` (`from_contenttype`),
+  KEY `IDX_4C524BC378CED90B` (`from_id`),
+  KEY `IDX_4C524BC35ACD2645` (`to_contenttype`),
+  KEY `IDX_4C524BC330354A65` (`to_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `bolt_relations`
@@ -645,6 +1163,35 @@ INSERT INTO `bolt_relations` (`id`, `from_contenttype`, `from_id`, `to_contentty
 (5, 'fotos', 1, 'galerias', 2),
 (6, 'fotos', 2, 'galerias', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_slides`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_slides` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `imagem` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `redirecionamento` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `destino` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D01345E989D9B62` (`slug`),
+  KEY `IDX_D01345EAFBA6FD8` (`datecreated`),
+  KEY `IDX_D01345EBE74E59A` (`datechanged`),
+  KEY `IDX_D01345EA5131421` (`datepublish`),
+  KEY `IDX_D01345EB7805520` (`datedepublish`),
+  KEY `IDX_D01345E7B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
 --
 -- Extraindo dados da tabela `bolt_slides`
 --
@@ -653,6 +1200,27 @@ INSERT INTO `bolt_slides` (`id`, `slug`, `datecreated`, `datechanged`, `datepubl
 (1, 'este-e-um-titulo-de-um-slide', '2015-03-26 12:59:49', '2015-03-26 12:59:49', '2015-03-26 12:58:47', NULL, '', 1, 'published', 'Este é um título de um slide', '{"file":"2015-03\\/1427374756_slide-1.jpg"}', 'http://oparque.art.br', '_blank'),
 (2, 'este-e-outro-slide-da-home', '2015-03-26 13:00:21', '2015-03-26 13:29:33', '2015-03-26 12:59:50', NULL, '', 1, 'published', 'Este é outro slide da home', '{"file":"2015-03\\/1427374807_slide-2.jpg"}', 'http://oparque.art.br', '_self'),
 (3, 'slide-sem-link-de-redirecionamento', '2015-03-26 13:12:33', '2015-03-26 13:12:33', '2015-03-26 13:11:13', NULL, '', 1, 'published', 'Slide sem link de redirecionamento', '{"file":"2015-03\\/slide-3.png"}', '', '_blank');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_taxonomy`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_taxonomy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content_id` int(11) NOT NULL,
+  `contenttype` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `taxonomytype` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `sortorder` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `IDX_ABAA120084A0A3ED` (`content_id`),
+  KEY `IDX_ABAA1200745E1826` (`contenttype`),
+  KEY `IDX_ABAA1200FE2A268F` (`taxonomytype`),
+  KEY `IDX_ABAA1200FEA3B3F9` (`sortorder`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 --
 -- Extraindo dados da tabela `bolt_taxonomy`
@@ -697,15 +1265,70 @@ INSERT INTO `bolt_taxonomy` (`id`, `content_id`, `contenttype`, `taxonomytype`, 
 (40, 6, 'noticias', 'tags', 'destaque', 'destaque', 0),
 (41, 7, 'noticias', 'categorias', 'agenda', 'agenda', 0),
 (42, 8, 'noticias', 'categorias', 'colaboradores', 'colaboradores', 0),
-(43, 9, 'noticias', 'categorias', 'colaboradores', 'colaboradores', 0),
-(44, 1, 'noticias', 'tags', 'ira', 'irá', 0);
+(43, 9, 'noticias', 'categorias', 'colaboradores', 'colaboradores', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_users`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `lastseen` datetime DEFAULT NULL,
+  `lastip` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `displayname` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `stack` varchar(1024) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `enabled` tinyint(1) NOT NULL,
+  `shadowpassword` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `shadowtoken` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `shadowvalidity` datetime DEFAULT NULL,
+  `failedlogins` int(11) NOT NULL DEFAULT '0',
+  `throttleduntil` datetime DEFAULT NULL,
+  `roles` varchar(1024) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `IDX_5585B54F85E0677` (`username`),
+  KEY `IDX_5585B5450F9BB84` (`enabled`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Extraindo dados da tabela `bolt_users`
 --
 
 INSERT INTO `bolt_users` (`id`, `username`, `password`, `email`, `lastseen`, `lastip`, `displayname`, `stack`, `enabled`, `shadowpassword`, `shadowtoken`, `shadowvalidity`, `failedlogins`, `throttleduntil`, `roles`) VALUES
-(1, 'romulo1984', '$P$DzvcZ8fTQBrpvcRwlScEfsl44EcLqH1', 'romulo1984@gmail.com', '2015-04-06 17:04:25', '127.0.0.1', 'Rômulo Guimarães', '["2015-04\\/icone-logo-preto.png","2015-04\\/slide-1.jpg","2015-04\\/exemplo-de-arquivo-para-ser-baixado.txt","2015-03\\/17.png","2015-03\\/16.png","2015-03\\/15.png","2015-03\\/14.png","2015-03\\/13.png","2015-03\\/12.png","2015-03\\/11.png"]', 1, '', '', NULL, 0, NULL, '["root","everyone"]');
+(1, 'romulo1984', '$P$DzvcZ8fTQBrpvcRwlScEfsl44EcLqH1', 'romulo1984@gmail.com', '2015-04-09 09:29:36', '127.0.0.1', 'Rômulo Guimarães', '["2015-04\\/logo-libre.png","2015-04\\/colabore.jpg","2015-04\\/icone-logo-preto.png","2015-04\\/slide-1.jpg","2015-04\\/exemplo-de-arquivo-para-ser-baixado.txt","2015-03\\/17.png","2015-03\\/16.png","2015-03\\/15.png","2015-03\\/14.png","2015-03\\/13.png"]', 1, '', '', NULL, 0, NULL, '["root","everyone"]');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `bolt_videos`
+--
+
+CREATE TABLE IF NOT EXISTS `bolt_videos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `datecreated` datetime NOT NULL,
+  `datechanged` datetime NOT NULL,
+  `datepublish` datetime DEFAULT NULL,
+  `datedepublish` datetime DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8_unicode_ci DEFAULT '',
+  `ownerid` int(11) DEFAULT NULL,
+  `status` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `titulo` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `resumo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `corpo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `video` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_9C6B70FD989D9B62` (`slug`),
+  KEY `IDX_9C6B70FDAFBA6FD8` (`datecreated`),
+  KEY `IDX_9C6B70FDBE74E59A` (`datechanged`),
+  KEY `IDX_9C6B70FDA5131421` (`datepublish`),
+  KEY `IDX_9C6B70FDB7805520` (`datedepublish`),
+  KEY `IDX_9C6B70FD7B00651C` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `bolt_videos`

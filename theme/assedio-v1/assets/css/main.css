@@ -575,6 +575,9 @@ a.item-agenda {
 .noticias-relacionadas .card-noticia-colabore:last-child {
   border-right: none;
 }
+.bloco-gravatar {
+  margin-top: 20px;
+}
 .pagination > li > a,
 .pagination > li > span {
   color: #ec7e8b;

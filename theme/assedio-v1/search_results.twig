@@ -1,0 +1,73 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12" style="height: 100%;">
+    <div class="row">
+        <div class="col-sm-10 padding-bottom-2 corpo-projeto">
+            <div class="row lista-noticias">
+                <div class="col-xs-12">
+                    {% if taxonomytype is defined %}
+                        <h1 class="cor1">
+                            {% if taxonomy.options[slug] is defined %}
+                                {{ taxonomy.options[slug]|upper }}
+                            {% else %}
+                                {{ slug|upper }}
+                            {% endif %}
+                        </h1>
+                        <hr>
+                        {# taxonomies are fetched unordered by design. If we specified an order in config.yml, sort them here: #}
+                        {% set records = records|order(app.config.get('general/listing_sort')) %}
+                    {% endif %}
+                    {% if searchresult.no_of_results > 0 %}
+                        <h1 class="text-uppercase">Resultados da busca para "<span class="cor1">{{search}}</span>"</h1>
+                        <hr>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row lista-noticias">
+                {% for item in records %}
+                    <div class="col-xs-12 item-lista-noticias">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>
+                                    <a href="{{item.link}}">{{item.titulo|upper}}</a>
+                                </h2>
+                                <div class="noticia-meta">
+                                    <span>{{item.datepublish|date('d/m/y - H\\hi')}}</span> 
+                                    {% for link, categoria in item.taxonomy.categorias %}
+                                        <a href="{{link}}">{{categoria|upper}}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="resumo-noticia">
+                                    {{item.resumo|excerpt(260)}}
+                                    <br>
+                                    <a href="{{item.link}}" class="leia-mais">LEIA <span class="fa fa-plus"></span></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                {% if item.imagem_destaque != '' and item.contenttype.slug != 'projetos' %}
+                                    <img src="{{image(item.imagem_destaque)}}" class="img-responsive" style="max-height: 200px;"/>
+                                {% elseif item.contenttype.slug == 'projetos' and item.logo != '' %}
+                                    <img src="{{image(item.logo)}}" class="img-responsive"/>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if records is empty %}
+                    <div class="col-xs-12 item-lista-noticias">
+                        <h3>Nenhum artigo encontrado para o critério selecionado</h3>
+                    </div>
+                {% endif %}
+                <div class="paginacao-noticias">
+                    {{pager('', 3, 'partials/_paginacao.twig')}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sobre-projetos">
+            {% include 'partials/_sidebar_noticias.twig' %}
+        </div>
+    </div>
+</div>
+{% include 'partials/_footer.twig' %}

@@ -1,0 +1,27 @@
+{
+    "name": "oparque/gravatar",
+    "description": "Simples extensão para adicionar uma imagem do Gravatar",
+    "type": "bolt-extension",
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rômulo Guimarães", 
+            "email": "romulo1984@gmail.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "init.php"
+        ],
+        "psr-4": {
+            "Bolt\\Extension\\oparque\\gravatar\\": ""
+        }
+    },
+    
+    "extra": {
+        "bolt-assets": "assets"
+    }
+}

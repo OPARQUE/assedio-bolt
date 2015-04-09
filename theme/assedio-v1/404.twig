@@ -1,0 +1,43 @@
+{% include 'partials/_header.twig' %}
+{% include 'partials/_main_sidebar.twig' %}
+
+{% setcontent config = 'config-assedio/1' %}
+<div class="col-sm-10 col-xs-12" style="height: 100%;">
+    <div class="row">
+        <div class="col-sm-10 padding-bottom-2 corpo-projeto">
+            <div class="row lista-noticias">
+                <div class="col-xs-12 item-lista-noticias">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>
+                                {{record.titulo|upper}}
+                            </h1>
+                        </div>
+                        <div class="col-md-12">
+                            {% if record.imagem_destaque != '' %}
+                                <img src="{{image(record.imagem_destaque)}}" class="img-responsive" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12 padding-top-2">
+                            <div class="resumo-noticia">
+                                {% if record.data != '' %}
+                                    <div class="card-data-agenda">
+                                        <h4>Data do evento:</h4>
+                                        <h2 class="cor1">{{record.data|date('d/m/Y')}}</h2>
+                                    </div>
+                                    <hr>
+                                {% endif %}
+                                {{record.corpo}}
+                            </div>
+                        </div>
+                    </div>
+                    {% include 'partials/_galeria.twig' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 sobre-projetos">
+            {% include 'partials/_sidebar_noticias.twig' %}
+        </div>
+    </div>
+</div>
+{% include 'partials/_footer.twig' %}

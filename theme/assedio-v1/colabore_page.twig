@@ -1,6 +1,7 @@
 {% include 'partials/_header.twig' %}
 {% include 'partials/_main_sidebar.twig' %}
 
+{% setcontent config = 'config-assedio/1' %}
 <div class="col-sm-10 col-xs-12 central-home">
     <div class="row">
         <div class="col-xs-12 topo-nos" style="background-image: url({{image(record.imagem_destaque)}})"></div>
@@ -10,7 +11,7 @@
             {{record.corpo}}
         </div>
         <div class="col-md-4 col-xs-6 corpo-nos">
-            <img src="{{paths.theme}}assets/img/colabore.jpg" class="img-responsive"/>
+            <img src="{{image(config.imagem_colabore)}}" class="img-responsive"/>
         </div>
     </div>
     <div class="row padding-bottom-2 link-preto-2">

@@ -57,7 +57,7 @@ homepage_template: index.twig
 # Make sure this is set to an existing record, otherwise visitors will get an error-page
 # when the request a non-existing page.
 # Note: If you are logged on, and debug is set to 'true', you will NOT see the 404 page!!
-notfound: page/not-found
+notfound: pagina/erro-404
 
 # The default content for the 403 'access denied' page.
 # Only valid when frontend_permission_checks is set to true
@@ -68,7 +68,7 @@ notfound: page/not-found
 # 'templateselect' field. Note: If you've changed the filename, and your changes
 # do not show up on the website, be sure to check for a config.yml file in your
 # theme's folder. If a template is set there, it will override the setting here.
-record_template: record.twig
+record_template: noticia.twig
 
 # The default template and amount of records to use for listing-pages on the site.
 # Can be overridden for each contenttype.
@@ -91,7 +91,7 @@ taxonomy_sort: DESC
 # and your changes do not show up on the website, be sure to check for a
 # config.yml file in your theme's folder. If a template is set there, it will
 # override the setting here.
-search_results_template: listing.twig
+search_results_template: search_results.twig
 search_results_records: 10
 
 # Add jQuery to the rendered HTML, whether or not it's added by an extension.
