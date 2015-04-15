@@ -580,18 +580,22 @@ a.item-agenda {
 
 
 //LANÇAMENTO E MANUTENÇÃO
+@amarelo:#ffd842;
 .lancamento {
-    background-color:#000;
-    padding:15px;
+    .borda_arredondada(30px);
+    background-color:@amarelo;
+    padding:30px;
     margin-top:15px;
-    color:#fff;
-    h2 {
+    color:@cor3;
+    h1 {
         margin:0;
+        color:@cor3;
     }
     a {
-        color:#ffd842;
+        color:@cor3;
+        font-weight:600;
         &:hover {
-            color:darken(#ffd842, 20%);
+            color:darken(#ffd842, 40%);
         }
     }
 }

@@ -602,19 +602,24 @@ a.item-agenda {
   color: #fff;
 }
 .lancamento {
-  background-color: #000;
-  padding: 15px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  background-color: #ffd842;
+  padding: 30px;
   margin-top: 15px;
-  color: #fff;
+  color: #000000;
 }
-.lancamento h2 {
+.lancamento h1 {
   margin: 0;
+  color: #000000;
 }
 .lancamento a {
-  color: #ffd842;
+  color: #000000;
+  font-weight: 600;
 }
 .lancamento a:hover {
-  color: #dbae00;
+  color: #755d00;
 }
 .span-amarelo {
   color: #ffd842;

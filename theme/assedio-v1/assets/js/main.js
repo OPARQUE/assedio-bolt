@@ -164,5 +164,22 @@ $(document).ready(function () {
         heightMap();
     });
 
+    var instagram = "https://api.instagram.com/v1/users/1357421768/media/recent/?client_id=864101c769b648289cdc27257505195e&count=1";
+
+    $.ajax({
+        type: "GET",
+        dataType: 'jsonp',
+        url: instagram,
+        crossDomain: true
+    })
+            .done(function (data) {
+                var image_instagram = data.data[0].images.standard_resolution.url;
+                $('.card-instagram').attr("style", "background-image: url(" + image_instagram + ")");
+            })
+            .fail(function (xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
+                console.log(textStatus);
+                $('.card-instagram').append('<span class="cor4">Não foi possível carregar a imagem do Instagram</span>');
+            });
 
 });
