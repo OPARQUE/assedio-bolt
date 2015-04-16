@@ -5,7 +5,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Assédio Coletivo</title>
+        <meta name="description" content="{% if record.resumo is not empty %}{{ record.resumo|striptags|excerpt }}{% elseif record.corpo is not empty %}{{ record.corpo|striptags|excerpt }}{% else %}{{ config.descricao }}{% endif %}"/>
+        <title>{% if record.titulo is defined %}{{ record.titulo|striptags }} | {% endif %}{{ app.config.get('general/sitename')|striptags }} {% if record.titulo is not defined and app.config.get('general/payoff') %} | {{ app.config.get('general/payoff')|striptags }}{% endif %}</title>
+
+        <meta property="og:locale" content="{{ app.config.get('general/locale')|striptags }}" />
+        <meta property="og:title" content="{% if record.titulo is defined %}{{ record.titulo|striptags }} | {% endif %}{{ app.config.get('general/sitename')|striptags }} {% if record.titulo is not defined and app.config.get('general/payoff') %} | {{ app.config.get('general/payoff')|striptags }}{% endif %}" />
+        <meta property="og:description" content="{% if record.resumo is not empty %}{{ record.resumo|striptags|excerpt }}{% elseif record.corpo is not empty %}{{ record.corpo|striptags|excerpt }}{% else %}{{ config.descricao }}{% endif %}" />
+        <meta property="og:url" content="{{ paths.currenturl }}" />
+        <meta property="og:site_name" content="{{ app.config.get('general/sitename')|striptags }}" />
+        <meta property="article:publisher" content="{{ config.facebook }}" />
+        <meta property="og:image" content="{% if record.imagem_destaque is not empty %}{{ paths.hosturl ~ image(record.imagem_destaque) }}{% elseif record.imagem is not empty %}{{ paths.hosturl ~ image(record.imagem) }}{% else %}{{ paths.hosturl ~ image(config.logo_site) }}{% endif %}" />
 
         <link rel="shortcut icon" type="image/png" href="{{image(config.logo_assedio_rodape)}}"/>
         <!-- Bootstrap -->
