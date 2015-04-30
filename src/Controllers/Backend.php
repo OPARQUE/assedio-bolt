@@ -553,30 +553,43 @@ class Backend implements ControllerProviderInterface
 
         $contenttype = $app['storage']->getContentType($contenttypeslug);
 
+        $filter = array();
+
+        $contentparameters = array('paging' => true, 'hydrate' => true);
+
         // Order has to be set carefully. Either set it explicitly when the user
         // sorts, or fall back to what's defined in the contenttype. The exception
         // is a contenttype that has a "grouping taxonomy", because that should
         // override it. The exception is handled in $app['storage']->getContent().
-        $order = $app['request']->query->get('order', $contenttype['sort']);
+        $contentparameters['order'] = $app['request']->query->get('order', $contenttype['sort']);
+        $contentparameters['page'] = $app['request']->query->get('page');
 
-        $page = $app['request']->query->get('page');
-        $filter = $app['request']->query->get('filter');
+        if ($app['request']->query->get('filter')) {
+            $contentparameters['filter'] = $app['request']->query->get('filter');
+            $filter[] = $app['request']->query->get('filter');
+        }
 
         // Set the amount of items to show per page.
         if (!empty($contenttype['recordsperpage'])) {
-            $limit = $contenttype['recordsperpage'];
+            $contentparameters['limit'] = $contenttype['recordsperpage'];
         } else {
-            $limit = $app['config']->get('general/recordsperpage');
+            $contentparameters['limit'] = $app['config']->get('general/recordsperpage');
         }
 
-        $multiplecontent = $app['storage']->getContent(
-            $contenttype['slug'],
-            array('limit' => $limit, 'order' => $order, 'page' => $page, 'filter' => $filter, 'paging' => true, 'hydrate' => true)
-        );
+        // Perhaps also filter on taxonomies
+        foreach($app['config']->get('taxonomy') as $taxonomykey => $taxonomy) {
+            if ($app['request']->query->get('taxonomy-' . $taxonomykey)) {
+                $contentparameters[$taxonomykey] = $app['request']->query->get('taxonomy-' . $taxonomykey);
+                $filter[] = $app['request']->query->get('taxonomy-' . $taxonomykey);
+            }
+        }
+
+        $multiplecontent = $app['storage']->getContent($contenttype['slug'], $contentparameters);
 
         $context = array(
             'contenttype'     => $contenttype,
             'multiplecontent' => $multiplecontent,
+            'filter'          => $filter
         );
 
         return $app['render']->render('overview/overview.twig', array('context' => $context));
@@ -922,15 +935,12 @@ class Backend implements ControllerProviderInterface
             $contentowner = $app['users']->getUser($content['ownerid']);
         }
 
+        $filesystem = $app['filesystem']->getFilesystem();
+
         // Test write access for uploadable fields
         foreach ($contenttype['fields'] as $key => &$values) {
             if (isset($values['upload'])) {
-                $canUpload = $app['filesystem']->getFilesystem()->getVisibility($values['upload']);
-                if ($canUpload === 'public') {
-                    $values['canUpload'] = true;
-                } else {
-                    $values['canUpload'] = false;
-                }
+                $values['canUpload'] = $filesystem->has($values['upload']) && $filesystem->getVisibility($values['upload']);
             } else {
                 $values['canUpload'] = true;
             }
@@ -1908,10 +1918,8 @@ class Backend implements ControllerProviderInterface
 
         // If we had to reload the config earlier on because we detected a version change, display a notice.
         if ($app['config']->notify_update) {
-            $notice = sprintf(
-                    "Detected Bolt version change to <b>%s</b>. Please clear the cache and check the database, if you haven't done so already.",
-                    $app->getVersion()
-                );
+            $notice = Trans::__("Detected Bolt version change to <b>%VERSION%</b>, and the cache has been cleared. Please <a href=\"%URI%\">check the database</a>, if you haven't done so already.",
+                array('%VERSION%' => $app->getVersion(), '%URI%' => $app['resources']->getUrl('bolt') . 'dbcheck'));
             $app['logger.system']->notice(strip_tags($notice), array('event' => 'config'));
             $app['session']->getFlashBag()->add('info', $notice);
         }

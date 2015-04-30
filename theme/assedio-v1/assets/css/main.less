@@ -481,6 +481,11 @@ form {
 .lista-noticias {
     padding-left: @gutter*3;
     padding-right: @gutter*3;
+    
+    @media (max-width: 991px) {
+        padding-left: @gutter / 2;
+        padding-right: @gutter / 2;
+    }
 }
 .item-lista-noticias {
     margin-top: @gutter;
@@ -542,6 +547,12 @@ a.item-agenda {
     .link-preto-2;
     padding-left: @gutter*3;
     padding-right: @gutter*3;
+    
+    @media (max-width: 991px) {
+        padding-left: @gutter / 2;
+        padding-right: @gutter / 2;
+    }
+    
     .card-noticia-colabore:last-child {
         border-right: none;
     }

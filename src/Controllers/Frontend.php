@@ -120,7 +120,7 @@ class Frontend
         $slug = $app['slugify']->slugify($slug);
 
         // First, try to get it by slug.
-        $content = $app['storage']->getContent($contenttype['slug'], array('slug' => $slug, 'returnsingle' => true));
+        $content = $app['storage']->getContent($contenttype['slug'], array('slug' => $slug, 'returnsingle' => true, 'log_not_found' => !is_numeric($slug)));
 
         if (!$content && is_numeric($slug)) {
             // And otherwise try getting it by ID
@@ -140,9 +140,17 @@ class Frontend
         // Then, select which template to use, based on our 'cascading templates rules'
         $template = $app['templatechooser']->record($content);
 
-        // Setting the canonical path and the editlink.
         $paths = $app['resources']->getPaths();
-        $app['resources']->setUrl('canonicalurl', sprintf('%s%s', $paths['canonical'], $content->link()));
+
+        // Setting the canonical URL.
+        if ($content->isHome() && ($template == $app['config']->get('general/homepage_template'))) {
+            $app['resources']->setUrl('canonicalurl', $paths['rooturl']);
+        } else {
+            $url = $paths['canonical'] . $content->link();
+            $app['resources']->setUrl('canonicalurl', $url);
+        }
+
+        // Setting the editlink
         $app['editlink'] = Lib::path('editcontent', array('contenttypeslug' => $contenttype['slug'], 'id' => $content->id));
         $app['edittitle'] = $content->getTitle();
 

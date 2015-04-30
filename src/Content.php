@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 class Content implements \ArrayAccess
 {
     protected $app;
+    protected $parsedown;
     public $id;
     public $values = array();
     public $taxonomy;
@@ -84,6 +85,8 @@ class Content implements \ArrayAccess
 
             $this->setValues($values);
         }
+
+        $this->parsedown = new \ParsedownExtra();
     }
 
     /**
@@ -195,7 +198,10 @@ class Content implements \ArrayAccess
                     break;
 
                 case 'html':
-                    $newvalue[$field] = str_replace('&nbsp;', ' ', $this->values[$field]);
+                    // Remove &nbsp; characters from CKEditor, unless configured to leave them in.
+                    if (!$this->app['config']->get('general/wysiwyg/ck/allowNbsp')) {
+                        $newvalue[$field] = str_replace('&nbsp;', ' ', $this->values[$field]);
+                    }
                     break;
             }
         }
@@ -406,9 +412,11 @@ class Content implements \ArrayAccess
                     continue; // Skip 'empty' uploads.
                 }
 
+                $paths = $this->app['resources']->getPaths();
+
                 $filename = sprintf(
-                    '%s/files/%s/%s',
-                    $this->app['paths']['rootpath'],
+                    '%sfiles/%s/%s',
+                    $paths['rootpath'],
                     date('Y-m'),
                     String::makeSafe($file['name'][0], false, '[]{}()')
                 );
@@ -676,11 +684,11 @@ class Content implements \ArrayAccess
                     $value = $this->preParse($this->values[$name], $allowtwig);
 
                     // Parse the field as Markdown, return HTML
-                    $value = \ParsedownExtra::instance()->text($value);
+                    $value = $this->parsedown->text($value);
 
                     $config = $this->app['config']->get('general/htmlcleaner');
                     $allowed_tags = !empty($config['allowed_tags']) ? $config['allowed_tags'] :
-                        array('div', 'p', 'br', 'hr', 's', 'u', 'strong', 'em', 'i', 'b', 'li', 'ul', 'ol', 'blockquote', 'pre', 'code', 'tt', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'dd', 'dl', 'dh', 'table', 'tbody', 'thead', 'tfoot', 'th', 'td', 'tr', 'a', 'img');
+                        array('div', 'p', 'br', 'hr', 's', 'u', 'strong', 'em', 'i', 'b', 'li', 'ul', 'ol', 'blockquote', 'pre', 'code', 'tt', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'dd', 'dl', 'dt', 'table', 'tbody', 'thead', 'tfoot', 'th', 'td', 'tr', 'a', 'img');
                     $allowed_attributes = !empty($config['allowed_attributes']) ? $config['allowed_attributes'] :
                         array('id', 'class', 'name', 'value', 'href', 'src');
 
@@ -943,6 +951,17 @@ class Content implements \ArrayAccess
         return preg_replace('/^([^?]*).*$/', '\\1', $link);
     }
 
+    /**
+     * Checks if the current record is set as the homepage.
+     */
+    public function isHome()
+    {
+        $homepage = $this->app['config']->get('general/homepage');
+
+        return (($this->contenttype['singular_slug'].'/'.$this->get('id') == $homepage) ||
+           ($this->contenttype['singular_slug'].'/'.$this->get('slug') == $homepage));
+    }
+
     protected function getRouteRequirementParams(array $route)
     {
         $params = array();
@@ -1070,10 +1089,17 @@ class Content implements \ArrayAccess
      *
      * @return \Bolt\Content[]
      */
-    public function related($filtercontenttype = null, $filterid = null)
+    public function related($filtercontenttype = null, $options = array())
     {
         if (empty($this->relation)) {
             return false; // nothing to do here.
+        }
+
+        // Backwards compatibility: If '$options' is a string, assume we passed an id
+        if (!is_array($options)) {
+            $options = array(
+                'id' => $options
+            );
         }
 
         $records = array();
@@ -1083,14 +1109,16 @@ class Content implements \ArrayAccess
                 continue; // Skip other contenttypes, if we requested a specific type.
             }
 
-            if ($contenttype === $filtercontenttype && !empty($filterid)) {
-                // Request was for a single record ID
-                $ids = array($filterid);
-            }
-
             $params = array('hydrate' => true);
             $where = array('id' => implode(' || ', $ids));
             $dummy = false;
+
+            // If there were other options add them to the 'where'. We potentially overwrite the 'id' here.
+            if (!empty($options)) {
+                foreach($options as $option => $value) {
+                    $where[$option] = $value;
+                }
+            }
 
             $tempResult = $this->app['storage']->getContent($contenttype, $params, $dummy, $where);
 

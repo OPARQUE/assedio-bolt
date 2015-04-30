@@ -488,6 +488,12 @@ form input {
   padding-left: 60px;
   padding-right: 60px;
 }
+@media (max-width: 991px) {
+  .lista-noticias {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 .item-lista-noticias {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -571,6 +577,12 @@ a.item-agenda {
 }
 .noticias-relacionadas a:hover {
   color: #ec7e8b;
+}
+@media (max-width: 991px) {
+  .noticias-relacionadas {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 .noticias-relacionadas .card-noticia-colabore:last-child {
   border-right: none;

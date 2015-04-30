@@ -158,7 +158,7 @@ class RemoteFilesystem
         $ctx = StreamContextFactory::getContext($fileUrl, $options, array('notification' => array($this, 'callbackGet')));
 
         if ($this->progress) {
-            $this->io->writeError("    Downloading: <comment>connection...</comment>", !$this->io->isDecorated());
+            $this->io->writeError("    Downloading: <comment>Connecting...</comment>", false);
         }
 
         $errorMessage = '';
@@ -405,6 +405,8 @@ class RemoteFilesystem
         }
 
         $options = array_replace_recursive($this->options, $additionalOptions);
+        $options['http']['protocol_version'] = 1.1;
+        $headers[] = 'Connection: close';
 
         if ($this->io->hasAuthentication($originUrl)) {
             $auth = $this->io->getAuthentication($originUrl);

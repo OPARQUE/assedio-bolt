@@ -1058,21 +1058,22 @@ class Storage
 
         $this->checkedfortimed["publish-" . $contenttype['slug']] = true;
         $tablename = $this->getTablename($contenttype['slug']);
-        $now = date('Y-m-d H:i:s', time());
 
         try {
             // Check if there are any records that need publishing.
             $stmt = $this->app['db']->executeQuery(
-                "SELECT id FROM $tablename WHERE status = 'timed' and datepublish < :now",
-                array('now' => $now)
+                "SELECT id FROM $tablename WHERE status = 'timed' and datepublish < CURRENT_TIMESTAMP"
             );
-
             // If there's a result, we need to set these to 'publish'.
             if ($stmt->fetch() !== false) {
-                $this->app['db']->query(
-                    "UPDATE $tablename SET status = 'published', datechanged = :now WHERE status = 'timed' and datepublish < :now",
-                    array('now' => $now)
+                // This is where we do black magic voodoo, because `datechanged` has the server
+                // time, which is not necessarily the same as `CURRENT_TIMESTAMP()`. Awesome!
+                $query = sprintf(
+                    "UPDATE %s SET status = 'published', datechanged = '%s' WHERE status = 'timed' and datepublish < CURRENT_TIMESTAMP",
+                    $tablename,
+                    date('Y-m-d H:i:s')
                 );
+                $this->app['db']->query($query);
             }
         } catch (DBALException $e) {
             $message = "Timed publication of records for $contenttype failed: " . $e->getMessage();
@@ -1100,16 +1101,17 @@ class Storage
 
             // Check if there are any records that need depublishing.
             $stmt = $this->app['db']->executeQuery(
-                "SELECT id FROM $tablename WHERE status = 'published' and datedepublish <= :now and datedepublish > '1900-01-01 00:00:01' and datechanged < datedepublish",
-                array('now' => $now)
+                "SELECT id FROM $tablename WHERE status = 'published' and datedepublish <= CURRENT_TIMESTAMP and datedepublish > '1900-01-01 00:00:01' and datechanged < datedepublish"
             );
 
             // If there's a result, we need to set these to 'held'.
             if ($stmt->fetch() !== false) {
-                $this->app['db']->query(
-                    "UPDATE $tablename SET status = 'held', datechanged = :now WHERE status = 'published' and datedepublish <= :now and datedepublish > '1900-01-01 00:00:01' and datechanged < datedepublish",
-                    array('now' => $now)
+                $query = sprintf(
+                    "UPDATE %s SET status = 'held', datechanged = '%s' WHERE status = 'published' and datedepublish <= CURRENT_TIMESTAMP and datedepublish > '1900-01-01 00:00:01' and datechanged < datedepublish",
+                    $tablename,
+                    date('Y-m-d H:i:s')
                 );
+                $this->app['db']->query($query);
             }
         } catch (DBALException $e) {
             $message = "Timed de-publication of records for $contenttype failed: " . $e->getMessage();
@@ -1240,7 +1242,7 @@ class Storage
 
         // When using from the frontend, we assume (by default) that we only want published items,
         // unless something else is specified explicitly
-        if (isset($this->app['end']) && $this->app['end'] == "frontend" && empty($ctypeParameters['status'])) {
+        if (isset($this->app['end']) && $this->app['end'] != "backend" && empty($ctypeParameters['status'])) {
             $ctypeParameters['status'] = "published";
         }
 
@@ -1306,7 +1308,9 @@ class Storage
             }
         }
 
-        if (!isset($metaParameters['limit'])) {
+        if ($decoded['return_single']) {
+            $metaParameters['limit'] = 1;
+        } elseif (!isset($metaParameters['limit'])) {
             $metaParameters['limit'] = 9999;
         }
     }
@@ -1465,7 +1469,7 @@ class Storage
                                 in_array($keyParts[$i], Content::getBaseColumns())) {
                                 $rkey = $tablename . '.' . $keyParts[$i];
                                 $fieldtype = $this->getContentTypeFieldType($contenttype['slug'], $keyParts[$i]);
-                                $orPart .= ' (' . $this->parseWhereParameter($rkey, $valParts[$i], $keyParts[$i], $fieldtype) . ') OR ';
+                                $orPart .= ' (' . $this->parseWhereParameter($rkey, $valParts[$i], $fieldtype) . ') OR ';
                             }
                         }
                         if (strlen($orPart) > 2) {
@@ -1510,8 +1514,7 @@ class Storage
             }
 
             if (count($order) == 0) {
-                // we didn't add table, maybe this is an issue
-                $order[] = 'datepublish DESC';
+                $order[] = $this->decodeQueryOrder($contenttype, false) ?: 'datepublish DESC';
             }
 
             if (count($where) > 0) {
@@ -1627,7 +1630,7 @@ class Storage
      *
      * @return array
      */
-    private function executeGetContentSearch($decoded, $parameters)
+    protected function executeGetContentSearch($decoded, $parameters)
     {
         $results = $this->searchContent(
             $parameters['filter'],
@@ -1653,7 +1656,7 @@ class Storage
      *
      * @return array
      */
-    private function executeGetContentQueries($decoded)
+    protected function executeGetContentQueries($decoded)
     {
         // Perform actual queries and hydrate
         $totalResults = false;
@@ -1748,6 +1751,12 @@ class Storage
             $parameters = array_merge((array) $parameters, (array) $whereparameters);
         }
 
+        $logNotFound = false;
+        if (isset($parameters['log_not_found'])) {
+            $logNotFound = $parameters['log_not_found'];
+            unset($parameters['log_not_found']);
+        }
+
         // Decode this textquery
         $decoded = $this->decodeContentQuery($textquery, $parameters);
         if ($decoded === false) {
@@ -1799,11 +1808,13 @@ class Storage
                 return util::array_first($results);
             }
 
-            $msg = sprintf(
-                "Requested specific query '%s', not found.",
-                $textquery
-            );
-            $this->app['logger.system']->error($msg, array('event' => 'storage'));
+            if ($logNotFound) {
+                $msg = sprintf(
+                    "Requested specific query '%s', not found.",
+                    $textquery
+                );
+                $this->app['logger.system']->error($msg, array('event' => 'storage'));
+            }
             $this->app['stopwatch']->stop('bolt.getcontent');
 
             return false;
@@ -2676,7 +2687,7 @@ class Storage
      *
      * @return mixed
      */
-    protected function getTablename($name)
+    public function getTablename($name)
     {
         $name = str_replace("-", "_", $this->app['slugify']->slugify($name));
         $tablename = sprintf("%s%s", $this->prefix, $name);
